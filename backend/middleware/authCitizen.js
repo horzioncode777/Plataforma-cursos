@@ -1,5 +1,5 @@
-const jwt = require("jsonwebtoken");
-const Citizen = require("../models/Citizen");
+import jwt from "jsonwebtoken";
+import Citizen from "../models/Citizen.js";
 
 const authCitizen = async (req, res, next) => {
   try {
@@ -10,10 +10,7 @@ const authCitizen = async (req, res, next) => {
       return res.status(401).json({ message: "Acceso denegado: no hay token" });
     }
 
-    // Mostrar la clave secreta en consola para depuración
-    console.log("🔐 Clave secreta:", process.env.SECRET_KEY);
-
-    // Asegurarse de que SECRET_KEY esté definido
+    // 🔐 Verificación de la clave secreta
     const secretKey = process.env.SECRET_KEY;
     if (!secretKey) {
       console.error("❌ SECRET_KEY no está definido en las variables de entorno");
@@ -35,4 +32,4 @@ const authCitizen = async (req, res, next) => {
   }
 };
 
-module.exports = authCitizen;
+export default authCitizen;
