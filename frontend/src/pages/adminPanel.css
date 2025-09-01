@@ -1,0 +1,230 @@
+/* Estilos generales */
+.admin-panel {
+    padding: 20px;
+    background-color: #f4f7fc;
+    min-height: 100vh;
+    width: 92.4rem;
+}
+
+.admin-panel h1 {
+    text-align: center;
+    color: #2e3f97;
+    font-size: 40px;
+    margin-bottom: 10px;
+    margin-top: 50px;
+}
+.admin-panel h2 {
+    color: #2e3f97;
+}
+
+/* Estilos del formulario */
+.course-form {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin-left: 29rem;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    width: 50rem;
+}
+
+.course-form label {
+    margin: 8px 0 4px;
+    font-weight: bold;
+    color: #2e3f97;
+}
+
+.course-form input,
+.course-form textarea {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: black;
+}
+.ButtonEliminar{
+    background-color: #2e3f97;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 30px;
+
+}
+.course-form button {
+    background-color: #2e3f97;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.course-form button:hover {
+    background-color: #0056b3;
+}
+
+.noticia-form h3,
+.noticia-form {
+    color: #2e3f97;
+}
+
+/* Estilos de la tabla de cursos */
+.course-table {
+    width: 95%;
+    margin-left: 35px;
+    margin-top: 70px;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.course-table th,
+.course-table td {
+    padding: 12px;
+    border: 2px solid #2e3f97;
+    text-align: center;
+    color: #333;
+}
+
+.course-table th {
+    background-color: #2e3f97;
+    color: white;
+}
+
+.course-image {
+    width: 60px;
+    height: auto;
+    border-radius: 5px;
+}
+
+/* Tabla de módulos subidos */
+.tabla-modulos-subidos {
+    max-width: 60rem;
+    margin: 30px auto;
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.tabla-modulos-subidos h3 {
+    color: #2e3f97;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.modulos-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.tabla-modulos-subidos td{
+    color: #000000;
+    
+}
+
+.modulos-table th,
+.modulos-table td {
+    border: 1px solid #2e3f97;
+    padding: 10px;
+    text-align: center;
+}
+
+.modulos-table th {
+    background-color: #2e3f97;
+    color: white;
+}
+
+/* Estilos de los botones */
+button {
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: 0.3s;
+    margin-bottom: 20px;
+}
+
+.edit-btn {
+    background-color: #28a745;
+    color: white;
+}
+
+.edit-btn:hover {
+    background-color: #218838;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.cancel-btn {
+    background-color: #6c757d;
+    color: white;
+}
+
+.cancel-btn:hover {
+    background-color: #5a6268;
+}
+
+@media (max-width: 1440px) {
+    .admin-panel {
+        width: 87.3rem;
+    }
+    .admin-panel h1 {
+        margin-left: 70px;
+    }    
+}
+@media (max-width: 1024px) {
+    .admin-panel {
+        width: 61.5rem;
+    }
+
+    .admin-panel h1 {
+        margin-left: 70px;
+    }
+    .course-form {
+        margin-left: 250px;
+    }
+    .course-table{
+        margin-left: 25px;
+    }
+}
+@media (max-width: 768px) {
+    .admin-panel {
+        width: 45.5rem;
+    }
+
+    .admin-panel h1 {
+        margin-left: 20px;
+    }
+
+    .course-form {
+        margin-left: 100px;
+    }
+
+    .course-table {
+        margin-left: 15px;
+    }
+}

@@ -1,0 +1,70 @@
+.curso-detalle {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.curso-header {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.curso-banner {
+  max-width: 400px;
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.curso-info {
+  flex: 1;
+}
+
+.curso-info h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.curso-info p {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.btn-enlace {
+  background-color: #2D6FC3;
+  color: white;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.btn-enlace:hover {
+  background-color: #204e93;
+}
+
+.modulos-titulo {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  border-bottom: 2px solid #2D6FC3;
+  padding-bottom: 0.3rem;
+}
+
+.modulo {
+  margin-top: 2rem;
+}
+
+.modulo h3 {
+  color: #2D6FC3;
+  margin-bottom: 1rem;
+}
+
+.modulo-iframe {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}

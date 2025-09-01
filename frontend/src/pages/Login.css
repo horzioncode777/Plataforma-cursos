@@ -1,0 +1,390 @@
+.login-container {
+    display: flex;
+    height: 110vh;
+    justify-content: center;
+    align-items: center;
+    background-image: url('/assets/BackgroundCiber.png');
+    background-size: cover;
+    background-position: center;
+    width: 97rem;
+    margin-top: 0px;
+    position: relative;
+    margin-bottom: -180px;
+}
+
+/* Caja principal dividida en dos secciones */
+.login-box {
+    display: block;
+    background: white;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    width: 800px;
+    overflow: hidden;
+    z-index: 2px;
+}
+.sesion-link-responsive{
+    display: none;
+}
+
+/* Estilos del formulario de inicio de sesión */
+.login-form {
+    background: white;
+    padding: 40px;
+    width: 70%;
+    border-radius: 20px;
+    height: 25rem;
+    margin-top: -30px;
+    margin-left: 50px;
+}
+
+.sesion {
+    width: 100%;
+    margin-top: 60px;
+}
+
+.login-form h2 {
+    color: #1e40af;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 35px;
+    margin-left: 10px;
+}
+
+.login-form p {
+    margin-left: 75px;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #ccc;
+    color: #000000;
+    margin-left: -10px;
+}
+
+.login-form button {
+    width: 80%;
+    padding: 10px;
+    background: #1e40af;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-left: 35px;
+    margin-top: 30px;
+}
+
+.login-form button:hover {
+    background: #1a3a8c;
+}
+
+/* Estilo general del botón */
+.register-link {
+    margin-top: 1rem;
+    padding: 0.6rem 1.2rem;
+    color: white;
+    border: 2px solid white;
+    background-color: transparent;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.register-link:hover {
+    color: #1a3a8c;
+    background-color: white;
+}
+
+/* Ocultar el botón dentro del formulario en escritorio */
+.register-link-mobile {
+    display: none;
+}
+
+.error-text {
+    color: red;
+    text-align: center;
+    margin-top: 10px;
+    margin-right: 60px;
+}
+
+/* Sección de registro */
+.register-box {
+    background: #2452c6;
+    color: white;
+    text-align: center;
+    padding: 40px;
+    width: 25rem;
+    height: 20rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: -13.5px;
+    z-index: 1;
+    margin-top: -30px;
+}
+
+.register-box h2 {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.register-box p {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.registerlinkResponsive {
+    display: none;
+}
+
+/* Logos en la parte inferior */
+.logos {
+    margin-top: 30px;
+}
+
+.logos img {
+    width: 300px;
+}
+
+.register-button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    border: #000000;
+    width: 200px;
+    margin-left: 80px;
+    border: 2px solid white;
+}
+
+.register-button:hover {
+    background-color: #ffffff;
+    color: #2452c6;
+}
+
+/* RESPONSIVE MEDIA QUERIES */
+@media (max-width: 1440px) {
+    .login-container {
+        width: 90rem;
+    }
+}
+
+@media (max-width: 1024px) {
+    .login-container {
+        height: 85vh;
+        width: 64rem;
+        margin-top: 0px;
+        margin-bottom: -180px;
+    }
+
+    .login-form {
+        width: 60%;
+        height: 20rem;
+        margin-top: -30px;
+    }
+
+    .login-form p {
+        margin-left: 45px;
+    }
+
+    .register-box {
+        width: 21rem;
+        height: 15rem;
+        margin-left: -48.5px;
+    }
+
+    .login-form h2 {
+        margin-bottom: -20px;
+        font-size: 35px;
+        margin-left: 10px;
+        margin-top: -10px;
+    }
+
+    .login-form button {
+        width: 60%;
+        padding: 10px;
+        margin-left: 50px;
+        margin-top: 10px;
+    }
+
+    .error-text p {
+        color: red;
+        text-align: center;
+        margin-top: 10px;
+        margin-left: -20px;
+    }
+
+    .register-box {
+        margin-left: -61.2px;
+    }
+
+    .register-link {
+        margin-top: 1rem;
+        max-width: 200px;
+        margin-left: 50px;
+    }
+
+    .register-button {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 10px 20px;
+        color: white;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        border: #000000;
+        width: 100px;
+        margin-left: 100px;
+        border: 2px solid white;
+    }
+}
+
+@media (max-width: 768px) {
+    .login-container {
+        width: 48rem;
+        margin-top: -10px;
+    }
+
+    .login-form {
+        width: 55%;
+        height: 20rem;
+        margin-top: -30px;
+        margin-left: 5px;
+    }
+
+    .login-form p {
+        margin-left: 20px;
+    }
+
+    .register-box {
+        width: 15rem;
+        height: 15rem;
+        margin-left: -110px;
+    }
+
+    .login-form h2 {
+        font-size: 30px;
+    }
+
+    .register-box h2 {
+        font-size: 17px;
+        font-weight: bold;
+        width: 300px;
+        margin-left: -30px;
+    }
+
+    .register-box p {
+        margin-bottom: 0px;
+        text-align: center;
+        width: 250px;
+        margin-left: -5px;
+    }
+
+    .logos {
+        margin-top: 20px;
+    }
+
+    .logos img {
+        width: 200px;
+    }
+
+    .register-link {
+        margin-top: 1rem;
+        max-width: 200px;
+        margin-left: 10px;
+    }
+
+    .register-button {
+        margin-left: 45px;
+    }
+}
+
+@media (max-width: 426px) {
+    .register-box {
+        display: none;
+    }
+
+    .login-container {
+        width: 26.6rem;
+        margin-top: -10px;
+    }
+
+    .login-form {
+        margin-left: 55px;
+    }
+
+    .registerlinkResponsive {
+        margin-top: 10px;
+        margin-left: 50px;
+        display: block;
+    }
+    .sesion-link-responsive{
+        display: block;
+        margin-left: -20px;
+    }
+    
+}
+
+@media (max-width: 376px) {
+    .register-box {
+        display: none;
+    }
+
+    .login-container {
+        width: 23.4rem;
+    }
+
+    .login-form {
+        margin-left: 0px;
+        width: 15rem;
+    }
+}
+
+@media (max-width: 320px) {
+    .register-box {
+        display: none;
+    }
+
+    .login-container {
+        width: 20rem;
+    }
+
+    .login-form {
+        margin-left: 0px;
+        width: 12.5rem;
+    }
+
+    .login-form h2 {
+        margin-left: 0px;
+        font-size: 28px;
+    }
+
+    .login-form p {
+        margin-left: 5px;
+    }
+
+    .login-form button {
+        margin-left: 35px;
+    }
+
+    .register-linkResponsive {
+        margin-top: 10px;
+        margin-left: 5px;
+        display: block;
+    }
+    .sesion-link-responsive{
+        display: block;
+        width: 250px;
+        margin-left: -25px;
+    }
+    
+}

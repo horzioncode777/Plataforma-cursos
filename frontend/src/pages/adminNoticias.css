@@ -1,0 +1,183 @@
+/* Estilos generales */
+.admin-noticias {
+    padding: 20px;
+    background-color: #f4f7fc;
+    min-height: 100vh;
+    width: 92.4rem;
+}
+
+.admin-noticias h1 {
+    text-align: center;
+    color: #2e3f97;
+    font-size: 40px;
+    margin-bottom: 10px;
+    margin-top: 50px;
+}
+
+/* Estilos del formulario */
+.noticia-form {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin-left: 29rem;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    width: 50rem;
+}
+.checkbox-label {
+    color: rgb(0, 0, 0);
+}
+.noticia-form input,
+.noticia-form textarea {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: black;
+    font-size: 16px;
+}
+.char-counter {
+    background-color: #ffffff;
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 10px;
+    text-align: right;
+  }
+  
+
+/* Asegurar que el campo de fecha sea interactivo */
+.noticia-form input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    /* Invierte el color para que se vea en fondos claros */
+    cursor: pointer;
+}
+.noticia-form input[type="date"] {
+    appearance: auto;
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+    background-color: white;
+    cursor: text;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.noticia-form button {
+    background-color: #2e3f97;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.noticia-form button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos de la tabla */
+.noticia-table {
+    width: 95%;
+    margin-left: 35px;
+    margin-top: 70px;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.label.title{
+    color: #333;
+}
+.conseticnav{
+    width: 100px;
+}
+.noticia-table th,
+.noticia-table td {
+    padding: 12px;
+    border: 2px solid #2e3f97;
+    text-align: center;
+    color: #333;
+}
+
+.noticia-table th {
+    background-color: #2e3f97;
+    color: white;
+}
+
+.noticia-image {
+    width: 60px;
+    height: auto;
+    border-radius: 5px;
+}
+
+/* Estilos de los botones */
+button {
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: 0.3s;
+    margin-bottom: 20px;
+}
+
+.edit-btn {
+    background-color: #28a745;
+    color: white;
+}
+
+.edit-btn:hover {
+    background-color: #218838;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}
+@media (max-width: 1440px) {
+.admin-noticias {
+        padding: 20px;
+        background-color: #f4f7fc;
+        min-height: 100vh;
+        width: 87.3rem;
+    }
+}
+@media (max-width: 1024px) {
+    .admin-noticias {
+        padding: 20px;
+        background-color: #f4f7fc;
+        min-height: 100vh;
+        width: 61.5rem;
+    }
+    .noticia-form{
+        margin-left: 220px;
+    }
+    .noticia-table {
+        margin-left: 25px;
+    }
+}
+@media (max-width: 768px) {
+    .admin-noticias {
+        padding: 20px;
+        background-color: #f4f7fc;
+        min-height: 100vh;
+        width: 45.5rem;
+    }
+
+    .noticia-form {
+        margin-left: 100px;
+    }
+
+    .noticia-table {
+        margin-left: 17px;
+    }
+}

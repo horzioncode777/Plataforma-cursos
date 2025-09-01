@@ -1,0 +1,438 @@
+/* 🔹 Evitar que el contenido quede tapado */
+body {
+    padding-top: 100px;
+}
+
+/* Barra azul superior */
+.top-bar {
+    background-color: #2D6FC3;
+    display: flex;
+    justify-content: flex-start;
+    padding: 10px 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.gov-logo {
+    height: 30px;
+    margin-left: 100px;
+}
+
+/* Navbar principal */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 15px 30px;
+    border-bottom: 2px solid #E0E0E0;
+    position: fixed;
+    top: 40px;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    height: 70px;
+}
+
+.nav-left .LogoAlcaldia {
+    height: 70px;
+    margin-left: 70px;
+}
+
+/* Estilos del menú de navegación */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 100px;
+    margin-right: auto;
+    margin-left: 220px;
+}
+
+.nav-links li {
+    display: inline;
+}
+
+.nav-links a {
+    color: black;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+}
+
+.nav-right .nav-button {
+    background-color: #2D6FC3;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    margin-right: 150px;
+    transition: all 0.3s ease-in-out;
+}
+
+.nav-right .nav-button:hover {
+    background-color: #1E5BA6;
+}
+
+.nav-links a:hover {
+    color: #2D6FC3;
+}
+
+/* 🔹 Estilos para el menú hamburguesa */
+.menu-icon {
+    display: none;
+    /* Oculto en pantallas grandes */
+    font-size: 2rem;
+    cursor: pointer;
+    color: #000000;
+    position: absolute;
+    top: 50%;
+    right: 60px;
+    transform: translateY(-50%);
+    z-index: 1100;
+    /* Asegura que esté sobre otros elementos */
+}
+.hamburger-login-button {
+    display: none;
+  }
+
+/* Estilos para pantallas pequeñas */
+@media (max-width: 1024px) {
+    .gov-logo {
+        margin-left: 50px;
+    }
+        
+    .nav-left .LogoAlcaldia {
+        margin-left: 0px;
+    }
+    .nav-links{
+        margin-left: 100px;
+        gap: 60px;
+    }
+    .nav-right .nav-button {
+        margin-right: 70px;
+ 
+    }
+}
+@media (max-width: 900px) {
+    .navbar {
+        padding: 10px;
+    }
+
+    .menu-icon {
+        display: block;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 90%;
+        right: 50px;
+        width: 250px;
+        background-color: white;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 20px;
+        padding: 20px 0;
+        border-radius: 10px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        display: none;
+        transition: all 0.3s ease-in-out;
+    }
+    
+    .nav-links.open{
+        display: flex;
+        opacity: 1;
+        transform: translateX(0);
+    }
+    .nav-links li {
+        width: 200px;
+        text-align: left;
+        padding: 10px 20px;
+        border-bottom: 2px solid #2D6FC3;
+        transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+    }
+    
+    .nav-links li:last-child {
+        border-bottom: 2px solid #2D6FC3;
+    }
+    .nav-links li::after {
+        animation: borderExpand 0.5s ease-in-out forwards;
+    }
+    .nav-links a {
+        color: black;
+        text-decoration: none;
+        font-size: 1.2rem;
+        font-weight: bold;
+        transition: all 0.3s ease-in-out;
+        margin-right: 20px;
+    }
+
+    .nav-links.open {
+        display: flex;
+    }
+
+    .nav-right {
+        display: none;
+    }
+
+    .nav-left .tic-logo {
+        height: 60px;
+    }
+    .gov-logo {
+        height: 20px;
+        margin-left: 320px;
+    }
+    .nav-left .tic-logo {
+        height: 100px;
+        margin-left: 60px;
+    }
+    .menu-icon {
+        display: block;
+        margin-right: 5px;
+        color:#1E5BA6
+    }
+    .nav-links {
+        gap: 15px;
+    }
+    .menu-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        /* Oscurece la página */
+        z-index: 998;
+        /* Debajo del menú */
+        display: none;
+        transition: opacity 0.3s ease-in-out;
+    }
+    .menu-overlay.active {
+        display: block;
+        opacity: 1;
+    }
+    body.menu-open {
+        overflow: hidden;
+        /* Evita el scroll al abrir el menú */
+    }
+
+    .nav-links a {
+        font-size: 1.40rem;
+    }
+
+    .menu-icon {
+        font-size: 1.8rem;
+    }
+
+    .nav-left .tic-logo {
+        height: 50px;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .gov-logo {
+        height: 20px;
+        margin-left: 320px;
+    }
+    .nav-left .tic-logo {
+        height: 100px;
+        margin-left: 60px;
+    }
+    .menu-icon {
+        display: block;
+        margin-right: 5px;
+        color:#1E5BA6
+    }
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        width: 300px;
+        background-color: white;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 60px 30px;
+        box-shadow: -2px 0 10px rgba(0, 0, 0, 0.15);
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in-out;
+        z-index: 1001;
+        display: flex;
+        gap: 20px;
+        
+    }
+    .nav-links.open {
+        transform: translateX(0%);
+    }
+    .nav-links li {
+        width: 100%;
+        margin: 15px 0;
+        text-align: left;
+        border-bottom: 2px solid #2D6FC3;
+      }  
+    .menu-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        /* Oscurece la página */
+        z-index: 998;
+        /* Debajo del menú */
+        display: none;
+        transition: opacity 0.3s ease-in-out;
+    }
+    .menu-overlay.active {
+        display: block;
+        opacity: 1;
+    }
+    body.menu-open {
+        overflow: hidden;
+        /* Evita el scroll al abrir el menú */
+    }
+
+    .nav-links a {
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: #003366;
+        text-decoration: none;
+        width: 100%;
+        padding-bottom: 8px;
+        border-bottom: 1px solid #ccc;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: color 0.3s;
+        border-bottom: none;
+      }
+      .nav-links a:hover {
+        color: #2D6FC3;
+      }
+
+    .menu-icon {
+        font-size: 1.8rem;
+    }
+
+    .nav-left .tic-logo {
+        height: 50px;
+    }
+    .mobile-only-button {
+        border-bottom: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+    
+      .hamburger-login-button {
+        all: unset;
+        display: block;
+        width: 40px;
+        justify-content: center;   /* Centra horizontalmente */
+        align-items: center !important;   
+        background-color: #2D6FC3;
+        color: white !important;
+        padding: 5px 10px;
+        border-radius: 8px;
+        font-weight: bold;
+        font-size: 1rem;
+        margin-top: 20px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      
+      .nav-button-Menu:hover {
+        background-color: #1E5BA6;
+      }
+      
+    .nav-button-Menu {
+        display: block;
+      }
+}
+
+@media (max-width: 426px) {
+
+    .navbar {
+        padding: 8px;
+    }
+    .menu-icon {
+        display: block;
+        margin-right: 20px;
+    }
+    .nav-links {
+        height:330px;
+        width: 150px;
+    }
+    .nav-links li {
+        width: 100px;
+        text-align: left;
+    }
+
+    .gov-logo {
+        height: 20px;
+        margin-left: 150px;
+    }
+
+    .nav-left .tic-logo {
+        height: 45px;
+        margin-left: 30px;
+    }
+
+    .menu-icon {
+        right: 10px;
+    }
+
+    .nav-links a {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 376px) {
+    .gov-logo {
+        height: 20px;
+        margin-left: 125px;
+    }
+        
+    .nav-left .tic-logo {
+        height: 50px;
+        margin-left: 20px;
+    }
+    .menu-icon {
+        display: block;
+        margin-left: 300px;
+    }
+    .nav-left .tic-logo {
+        height: 40px;
+    }
+
+    .nav-links a {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 320px) {
+    .gov-logo {
+        height: 20px;
+        margin-left: 105px;
+    }
+    .menu-icon {
+       display: block;
+       margin-right: 20px;
+    }
+    .nav-left .tic-logo {
+        height: 35px;
+    }
+
+    .menu-icon {
+        font-size: 1.6rem;
+    }
+
+    .nav-links a {
+        font-size: 0.8rem;
+    }
+}

@@ -1,0 +1,373 @@
+/*ministerio*/
+
+.ministerio-container {
+    background: #ffffff;
+    width: 70rem;
+    height: 25rem;
+    padding: 20px;
+    margin-left: 160px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+    /* Sombra más pronunciada */
+    margin-top: 0px;
+    text-align: center;
+}
+.home-ministerio .ministerio-container {
+    background: #ffffff;
+    width: 70rem;
+    height: 25rem;
+    padding: 20px;
+    margin-left: 160px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+    /* Sombra más pronunciada */
+    margin-top: 150px;
+    text-align: center;
+}
+.navMin.consetics-ministerio {
+    margin-top: -7rem;
+    margin-left: 20px;
+}
+.noticias-ministerio .ministerio-container {
+    background: #ffffff;
+    width: 70rem;
+    height: 25rem;
+    padding: 20px;
+    margin-left: 160px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+    /* Sombra más pronunciada */
+    margin-top: 100px;
+    text-align: center;
+}
+.Register-ministerio .ministerio-container {
+    background: #ffffff;
+    width: 70rem;
+    height: 25rem;
+    padding: 20px;
+    margin-left: 160px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+    margin-top: 150px;
+    text-align: center;
+}
+.home-ministerio {
+    width: 93.8rem;
+}
+
+.ministerio-container h2 {
+    color: #004b8d;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.ministerio-container p {
+    color: #333;
+    margin: 5px 0;
+}
+
+.ministerio-container a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.social-links,
+.extra-links {
+    margin-top: 10px;
+    display: flex;
+    justify-content: left;
+    gap: 15px;
+}
+
+.footer {
+    background: #003366;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: -340px;
+    margin-left: -20px;
+    height: 30rem;
+    width: 96.  3rem;
+    position: relative;
+    z-index: -2;
+}
+
+.footer img {
+    margin-top: 380px;
+    height: 70px;
+}
+@media (max-width: 1440px) {
+    .home-ministerio {
+        width: 88.7rem;
+    }
+    .home-ministerio .ministerio-container {
+        margin-left: 125px;
+    }
+    .noticias-ministerio .ministerio-container {
+        margin-left: 140px;
+    }
+    .consetics-ministerio {
+        margin-top: -7rem;
+        width: 88.7rem;
+    }
+    .consetics-ministerio .ministerio-container{
+        margin-top: -7rem;
+        margin-left: 125px;
+    }
+
+}
+@media (max-width: 1024px) {
+    .home-ministerio {
+        width: 62.7rem;
+    }
+    .noticias-ministerio .ministerio-container {
+        background: #ffffff;
+        width: 50rem;
+        height: 25rem;
+        padding: 20px;
+        margin-left: 90px;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+        /* Sombra más pronunciada */
+        margin-top: 150px;
+        text-align: center;
+    }
+    .home-ministerio .ministerio-container {
+        background: #ffffff;
+        width: 50rem;
+        height: 25rem;
+        padding: 20px;
+        margin-left: 70px;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+        /* Sombra más pronunciada */
+        margin-top: 150px;
+        text-align: center;
+    }
+    .noticias-ministerio {
+        width: 64rem;
+    }
+    .consetics-ministerio {
+        margin-top: -7rem;
+        width: 62.7rem;
+    }
+    .consetics-ministerio .ministerio-container{
+        margin-top: -7rem;
+        margin-left: 70px;
+        width: 50rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .home-ministerio {
+        width: 46.7rem;
+    }
+
+    .home-ministerio .ministerio-container {
+        background: #ffffff;
+        width: 37.5rem;
+        height: 25rem;
+        padding: 20px;
+        margin-left: 45px;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+        margin-top: 150px;
+        text-align: center;
+    }
+    .noticias-ministerio .ministerio-container {
+        background: #ffffff;
+        width: 37.5rem;
+        height: 25rem;
+        padding: 20px;
+        margin-left: 65px;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+        margin-top: 150px;
+        text-align: center;
+    }
+
+    .noticias-ministerio {
+        width: 48rem;
+    }
+    .consetics-ministerio {
+        margin-top: -7rem;
+        width: 46.7rem;
+    }
+    .consetics-ministerio .ministerio-container{
+        margin-top: -7rem;
+        margin-left: 70px;
+        width: 34.5rem;
+    }
+}
+@media (max-width: 426px) {
+    .home-ministerio {
+        width: 25.3rem;
+    }
+
+    .home-ministerio .ministerio-container {
+        background: #ffffff;
+        width: 21rem;
+        height: 33rem;
+        padding: 20px;
+        margin-left: 5px;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+        margin-top: 120px;
+        text-align: center;
+    }
+
+    .noticias-ministerio .ministerio-container {
+        background: #ffffff;
+        width: 22.3rem;
+        height: 31rem;
+        padding: 20px;
+        margin-left: 15px;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+        margin-top: 50px;
+        text-align: center;
+    }
+
+    .noticias-ministerio {
+        width: 26.6rem;
+    }
+    .consetics-ministerio {
+        margin-top: -7rem;
+        width: 25.3rem;
+    }
+    .consetics-ministerio .ministerio-container{
+        margin-top: -13rem;
+        margin-left: -6px;
+        width: 22.3rem;
+        height: 31rem;
+    }
+}
+@media (max-width: 376px) {
+    .home-ministerio {
+        width: 22.2rem;
+    }
+
+    .home-ministerio .ministerio-container {
+        background: #ffffff;
+        width: 18.6rem;
+        height: 35rem;
+        padding: 20px;
+        margin-left: 0px;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+        margin-top: 110px;
+        text-align: center;
+    }
+
+    .noticias-ministerio .ministerio-container {
+        background: #ffffff;
+        width: 20.2rem;
+        height: 35rem;
+        padding: 10px;
+        margin-left: 15px;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+        margin-top: -10px;
+        text-align: center;
+    }
+
+    .noticias-ministerio {
+        width: 23.4rem;
+    }
+    .footer img{
+        height: 50px;
+        margin-left: -10px;
+    }
+    .consetics-ministerio {
+        margin-top: -7rem;
+        width: auto;
+    }
+    .consetics-ministerio .ministerio-container{
+        margin-top: -17rem;
+        margin-left: -6px;
+        width: 19rem;
+        height: auto;
+    }
+}
+@media (max-width: 376px) {
+    .home-ministerio {
+        width: 22.2rem;
+    }
+
+    .home-ministerio .ministerio-container {
+        background: #ffffff;
+        width: 18.6rem;
+        height: 35rem;
+        padding: 20px;
+        margin-left: 0px;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+        margin-top: 110px;
+        text-align: center;
+    }
+
+    .noticias-ministerio .ministerio-container {
+        background: #ffffff;
+        width: 20.2rem;
+        height: 35rem;
+        padding: 10px;
+        margin-left: 15px;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+        margin-top: -10px;
+        text-align: center;
+    }
+
+    .noticias-ministerio {
+        width: 23.4rem;
+    }
+
+    .footer img {
+        height: 50px;
+        margin-left: -10px;
+    }
+}
+@media (max-width: 321px) {
+    .home-ministerio {
+        width: 18.7rem;
+    }
+
+    .home-ministerio .ministerio-container {
+        background: #ffffff;
+        width: 16rem;
+        height: 28rem;
+        padding: 20px;
+        margin-left: -8px;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+        margin-top: 110px;
+        text-align: center;
+    }
+    .home-ministerio .ministerio-container p {
+        font-size: 12px;
+    }
+
+    .noticias-ministerio .ministerio-container {
+        background: #ffffff;
+        width: 17.6rem;
+        height: 28rem;
+        padding: 10px;
+        margin-left: 9px;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+        margin-top: -10px;
+        text-align: center;
+    }
+    .noticias-ministerio .ministerio-container p {
+        font-size: 12px;
+    }
+
+    .noticias-ministerio {
+        width: 20rem;
+    }
+
+    .footer img {
+        height: 50px;
+        margin-left: -10px;
+    }
+}

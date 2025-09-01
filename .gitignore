@@ -1,0 +1,31 @@
+# Node / builds
+node_modules/
+dist/
+build/
+.cache/
+coverage/
+
+# Entornos
+.env
+.env.local
+.env.*.local
+backend/.env
+frontend/.env
+
+# Cargas / cursos / binarios pesados
+backend/uploads/
+uploads/
+public/uploads/
+*.zip
+*.rar
+*.7z
+*.mp4
+*.mov
+*.avi
+*.iso
+
+# Temp
+backend/tmp/
+npm-debug.log*
+yarn-*.log
+pnpm-debug.log

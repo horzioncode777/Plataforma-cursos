@@ -1,0 +1,34 @@
+{
+  "name": "tic-cursos-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "dev:legacy": "cross-env VITE_ENABLE_TW=false vite",
+    "dev:tw": "cross-env VITE_ENABLE_TW=true vite",
+    "build:legacy": "cross-env VITE_ENABLE_TW=false vite build",
+    "build:tw": "cross-env VITE_ENABLE_TW=true vite build"
+  },
+  "dependencies": {
+    "antd": "^5.24.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^7.4.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.21",
+    "cross-env": "^7.0.3",
+    "postcss": "^8.5.4",
+    "tailwindcss": "^4.1.8",
+    "vite": "^6.2.2"
+  },
+  "description": "This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.",
+  "main": "vite.config copy.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

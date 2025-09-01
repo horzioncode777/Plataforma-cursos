@@ -1,0 +1,909 @@
+
+/* ======== ENCABEZADO ======== */
+.perfil-header {
+  background-color: #2D6FC3;
+  display: flex;
+  padding: 0.5rem 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 94rem;
+  margin-top: -30px;
+  position: fixed;
+  z-index: 1000;
+}
+
+.perfil-header img {
+  height: 30px;
+  margin-top: 2px;
+  margin-left: 70px;
+}
+
+/* ======== SIDEBAR ======== */
+.sidebar {
+  width: 300px;
+  height: 44rem;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+  position: fixed;
+  margin-top: px;
+  z-index: 600;
+}
+
+.LogoAlcaldia {
+  margin-top: 30px;
+  margin-left: 50px;
+  height: 75px;
+  width: 200px;
+  margin-bottom: -5px;
+  padding-bottom: 20px;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-btn {
+  padding: 12px 10px;
+  background-color: #e9e9e9;
+  text-align: center;
+  font-size: 1rem;
+  cursor: pointer;
+  color: #333;
+  border: 1px solid #afafaf;
+  height: 60px;
+  margin-bottom: 0px;
+  border-radius: 0;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.sidebar-btn:hover {
+  background-color: #233c55;
+  color: white;
+  border-color: transparent;
+}
+
+.sidebar-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 9rem;
+  margin-top: 200px;
+}
+
+.sidebar-footer img {
+  height: 45px;
+}
+
+/* ======== BODY PRINCIPAL ======== */
+.perfil-body {
+  display: flex;
+  flex-direction: row;
+  height: calc(100vh - 60px);
+  background-color: #1f1f1f;
+}
+
+/* ======== CONTENIDO ======== */
+.contenido {
+  flex: 1;
+  padding: 2rem;
+  background-color: #1f1f1f;
+}
+
+/* ======== PANEL BUSQUEDA ======== */
+.panel-busqueda {
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  width: 74rem;
+  margin-top: -15px;
+  margin-left: 266px;
+  display: flex;
+  padding: 27.1px;
+  border-bottom: 1px solid #ddd;
+  position: fixed;
+  z-index: 600;
+}
+
+.buscador {
+  display: flex;
+  align-items: center;
+  background-color: #e9e9e9;
+  padding: 10px 20px;
+  border-radius: 999px;
+  width: 700px;
+  margin: 1rem auto 0 auto;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  margin-top: -5px;
+  color: #1f1f1f;
+  margin-left: 40px;
+}
+
+.icono-busqueda {
+  margin-right: 10px;
+  color: #999;
+  font-size: 1.2rem;
+}
+
+.input-busqueda {
+  border: none;
+  background: transparent;
+  font-size: 1rem;
+  width: 100%;
+  outline: none;
+  color: #1f1f1f;
+}
+
+/* ======== PERFIL USUARIO HEADER ======== */
+.perfil-usuario {
+  position: relative;
+  cursor: pointer;
+  width: 50px;
+  height: 60px;
+  margin-bottom: -20px;
+  margin-right: 40px;
+}
+
+.imagen-perfil {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid #ccc;
+  margin-top: -7px;
+}
+
+/* ======== MENU DESPLEGABLE PERFIL ======== */
+.menu-desplegable {
+  position: absolute;
+  top: 70px;
+  right: 0px;
+  width: 300px;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.12);
+  padding: 1.5rem 1.25rem 2rem;
+  z-index: 1000;
+  text-align: center;
+}
+
+.correo-usuario {
+  font-size: .85rem;
+  font-weight: 500;
+  color: #6b7280;
+  margin-bottom: .75rem;
+  word-break: break-word;
+}
+
+.avatar-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 90px;
+  height: 90px;
+  margin-bottom: 0.5rem;
+}
+
+.avatar-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #ffffff;
+}
+
+.saludo {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 1.25rem;
+}
+
+.btn-perfil {
+  display: block;
+  width: 100%;
+  padding: .65rem 1rem;
+  margin: .6rem 0;
+  font-size: .95rem;
+  font-weight: 500;
+  color: #1f2937;
+  background: #f9fafb;
+  border: 1px solid #d1d5db;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background .25s, color .25s, border-color .25s;
+}
+
+.btn-perfil:hover {
+  background: #2d6fc3;
+  color: #ffffff;
+  border-color: #2d6fc3;
+}
+
+.btn-primario {
+  background: #ffffff;
+  border: 2px solid #2d6fc3;
+  color: #2d6fc3;
+}
+
+.btn-primario:hover {
+  background: #2d6fc3;
+  color: #ffffff;
+}
+
+/* ======== MODAL ACTUALIZAR PERFIL ======== */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal {
+  background: #fff;
+  padding: 30px;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 700px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  position: relative;
+}
+
+.cerrar-modal {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #666;
+  cursor: pointer;
+}
+
+.cerrar-modal:hover {
+  color: #ff0000;
+}
+
+.modal form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: center;
+}
+
+.modal h3 {
+  grid-column: span 2;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #000000;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #000000;
+}
+
+.form-group input,
+.form-group select {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: #f9f9f9;
+  font-size: 14px;
+  color: #000000;
+}
+
+.form-group input::placeholder,
+.form-group select::placeholder {
+  color: #2D6FC3;
+}
+
+/* botón especial */
+.btn-primario {
+  background-color: #2D6FC3;
+  color: #fff;
+  font-weight: 600;
+  grid-column: span 2;
+  margin-top: 10px;
+}
+
+/* Responsive */
+@media (max-width: 1440px) {
+  .sidebar {
+    height: 47rem;
+  }
+  .sidebar-footer {
+    margin-top: 300px;
+  }
+  
+  .panel-busqueda {
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    width: 70rem;
+    margin-top: -15px;
+    margin-left: 266px;
+    display: flex;
+    padding: 27.1px;
+    border-bottom: 1px solid #ddd;
+    position: fixed;
+    z-index: 600;
+  }
+  
+  .buscador {
+    display: flex;
+    align-items: center;
+    background-color: #e9e9e9;
+    padding: 10px 20px;
+    border-radius: 999px;
+    width: 450px;
+    margin: 1rem auto 0 auto;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    margin-top: -5px;
+    color: #1f1f1f;
+    margin-left: 40px;
+  }
+  .perfil-header {
+    background-color: #2D6FC3;
+    display: flex;
+    padding: 0.5rem 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 87rem;
+    margin-top: -30px;
+    position: fixed;
+    z-index: 1000;
+  }
+}
+@media (max-width: 1024px) {
+  .panel-busqueda {
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    width: 44rem;
+    margin-top: -15px;
+    margin-left: 238px;
+    display: flex;
+    padding: 27.1px;
+    border-bottom: 1px solid #ddd;
+    position: fixed;
+    z-index: 600;
+  }
+  .perfil-header {
+    background-color: #2D6FC3;
+    display: flex;
+    padding: 0.5rem 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 87rem;
+    margin-top: -30px;
+    position: fixed;
+    z-index: 1000;
+  }
+  .sidebar {
+    width: 270px;
+    height: 40rem;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+    position: fixed;
+    margin-top: px;
+    z-index: 600;
+  }
+  
+  .LogoAlcaldia {
+    margin-top: 30px;
+    margin-left: 30px;
+    height: 75px;
+    width: 200px;
+    margin-bottom: -5px;
+    padding-bottom: 20px;
+  }
+  .sidebar-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 9rem;
+    margin-top: 120px;
+    margin-left: -10px;
+  }
+  
+  .sidebar-footer img {
+    height: 45px;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .panel-busqueda {
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    width: 36rem;
+    margin-top: -15px;
+    margin-left: 138px;
+    display: flex;
+    padding: 23.1px;
+    border-bottom: 1px solid #ddd;
+    position: fixed;
+    z-index: 600;
+  }
+  .buscador {
+    width: 300px;
+    margin-left: 0px;
+    height: 18px;
+    margin-top: 6px;
+  }
+  .perfil-header {
+    background-color: #2D6FC3;
+    display: flex;
+    padding: 0.5rem 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 87rem;
+    margin-top: -30px;
+    position: fixed;
+    z-index: 1000;
+  }
+  .sidebar {
+    width: 170px;
+    height: 40rem;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+    position: fixed;
+    margin-top: px;
+    z-index: 600;
+  }
+  
+  .LogoAlcaldia {
+    margin-top: 30px;
+    margin-left: -5px;
+    height: 65px;
+    width: 175px;
+    margin-bottom: -5px;
+    padding-bottom: 20px;
+  }
+  .sidebar-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 9rem;
+    margin-top: 150px;
+    margin-left: -60px;
+  }
+  
+  .sidebar-footer img {
+    height: 30px;
+  }
+}
+@media (max-width: 426px) {
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200vw;
+    height: 120vh;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+  
+  .modal {
+    background: #fff;
+    padding: 30px;
+    border-radius: 16px;
+    width: 40%;
+    max-width: 600px;
+    margin-left: -420px;
+    margin-top: -90px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    position: relative;
+    height: 510px;
+  }
+  
+  .cerrar-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: #666;
+    cursor: pointer;
+  }
+  
+  .cerrar-modal:hover {
+    color: #ff0000;
+  }
+  
+  .modal form {
+    display: contents;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: center;
+    margin-left:   12.5px;
+  }
+  
+  .modal h3 {
+    grid-column: span 2;
+    text-align: center;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #000000;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin-left: 0px;
+  }
+  
+  .form-group label {
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #000000;
+    font-size: 14px;
+  }
+  
+  .form-group input,
+  .form-group select {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background: #f9f9f9;
+    font-size: 10px;
+    color: #000000;
+  }
+  
+  .form-group input::placeholder,
+  .form-group select::placeholder {
+    color: #2D6FC3;
+  }
+  
+  /* botón especial */
+  .btn-primario {
+    background-color: #2D6FC3;
+    color: #fff;
+    font-weight: 600;
+    grid-column: span 2;
+    margin-top: 10px;
+  }
+  
+  .panel-busqueda {
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    width: 18.5rem;
+    margin-top: -15px;
+    margin-left: 108px;
+    display: flex;
+    padding: 17.5px;
+    border-bottom: 1px solid #ddd;
+    position: fixed;
+    z-index: 600;
+  }
+  .buscador {
+    width: 150px;
+    margin-left: 0px;
+    height: 18px;
+    margin-top: 6px;
+  }
+  .perfil-header {
+    background-color: #2D6FC3;
+    display: flex;
+    padding: 0.5rem 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 87rem;
+    margin-top: -30px;
+    position: fixed;
+    z-index: 1000;
+  }
+  .sidebar {
+    width: 140px;
+    height: 40rem;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+    position: fixed;
+    margin-top: px;
+    z-index: 600;
+  }
+  
+  .LogoAlcaldia {
+    margin-top: 30px;
+    margin-left: -5px;
+    height: auto;
+    width: 145px;
+    margin-bottom: -5px;
+    padding-bottom: 20px;
+  }
+  .sidebar-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 9rem;
+    margin-top: 170px;
+    margin-left: -75px;
+  }
+  
+  .sidebar-footer img {
+    height: 25px;
+  }
+  
+}
+
+@media (max-width: 376px) {
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200vw;
+    height: 120vh;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+  
+  .modal {
+    background: #fff;
+    padding: 30px;
+    border-radius: 16px;
+    width: 40%;
+    max-width: 600px;
+    margin-left: -320px;
+    margin-top: 0px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    position: relative;
+    height: 570px;
+  }
+  
+  .cerrar-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #666;
+    cursor: pointer;
+  }
+  
+  .cerrar-modal:hover {
+    color: #ff0000;
+  }
+  
+  .modal form {
+    display: contents;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: center;
+    margin-left:   12.5px;
+  }
+  
+  .modal h3 {
+    grid-column: span 2;
+    text-align: center;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    font-size: 24px;
+    font-weight: 700;
+    color: #000000;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin-left: 0px;
+  }
+  
+  .form-group label {
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #000000;
+  }
+  
+  .form-group input,
+  .form-group select {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background: #f9f9f9;
+    font-size: 14px;
+    color: #000000;
+  }
+  
+  .form-group input::placeholder,
+  .form-group select::placeholder {
+    color: #2D6FC3;
+  }
+  .panel-busqueda {
+    margin-left: 107px;
+  }
+  .sidebar {
+    width: 140px;
+    height: 43rem;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+    position: fixed;
+    margin-top: 0px;
+    z-index: 600;
+  }
+  
+  .sidebar-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 9rem;
+    margin-top: 170px;
+    margin-left: -75px;
+  }
+  
+  .sidebar-footer img {
+    height: 25px;
+  }
+  
+}
+@media (max-width: 376px) {
+  .panel-busqueda {
+    margin-left: 107px;
+  }
+  .sidebar {
+    width: 140px;
+    height: 43rem;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+    position: fixed;
+    margin-top: 0px;
+    z-index: 600;
+  }
+  
+  .sidebar-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 9rem;
+    margin-top: 240px;
+    margin-left: -75px;
+  }
+  
+  .sidebar-footer img {
+    height: 25px;
+  }
+  
+}
+@media (max-width: 320px) {
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 230vw;
+    height: 140vh;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+  
+  .modal {
+    background: #fff;
+    padding: 30px;
+    border-radius: 16px;
+    width: 40%;
+    max-width: 600px;
+    margin-left: -320px;
+    margin-top: 0px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    position: relative;
+    height: 570px;
+  }
+  
+  .cerrar-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #666;
+    cursor: pointer;
+  }
+  
+  .cerrar-modal:hover {
+    color: #ff0000;
+  }
+  
+  .modal form {
+    display: contents;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: center;
+    margin-left:   12.5px;
+  }
+  
+  .modal h3 {
+    grid-column: span 2;
+    text-align: center;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    font-size: 24px;
+    font-weight: 700;
+    color: #000000;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin-left: 0px;
+  }
+  
+  .form-group label {
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #000000;
+  }
+  
+  .form-group input,
+  .form-group select {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background: #f9f9f9;
+    font-size: 14px;
+    color: #000000;
+  }
+  
+  .form-group input::placeholder,
+  .form-group select::placeholder {
+    color: #2D6FC3;
+  }
+  .sidebar {
+    height: 50rem;
+  }
+  .sidebar-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 9rem;
+    margin-top: 350px;
+    margin-left: -75px;
+  }
+  .sidebar-footer img {
+    height: 25px;
+    margin-top: 0px;
+  }
+}
