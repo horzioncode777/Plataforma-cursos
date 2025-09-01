@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import AdminNavbar from "../components/AdminNavbar";
-import "./AdminNoticias.css";
+import "./adminNoticias.css";
 
 const AdminConsetics = () => {
   const [masConsejos, setMasConsejos] = useState([]);
