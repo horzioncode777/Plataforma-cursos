@@ -1,4 +1,5 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
+
 const { Schema } = mongoose;
 
 const misCursoSchema = new Schema({
@@ -18,4 +19,5 @@ const misCursoSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model("MisCurso", misCursoSchema);
+const MisCurso = mongoose.model("MisCurso", misCursoSchema);
+export default MisCurso;

@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const inscripcionSchema = new mongoose.Schema({
   nombre: {
@@ -31,4 +31,5 @@ const inscripcionSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Inscripcion", inscripcionSchema);
+const Inscripcion = mongoose.model("Inscripcion", inscripcionSchema);
+export default Inscripcion;

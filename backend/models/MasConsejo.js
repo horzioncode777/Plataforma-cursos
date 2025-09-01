@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const masConsejoSchema = new mongoose.Schema({
   titulo: { type: String, required: true },
@@ -6,4 +6,5 @@ const masConsejoSchema = new mongoose.Schema({
   imagen: { type: String, required: true }
 });
 
-module.exports = mongoose.model("MasConsejo", masConsejoSchema);
+const MasConsejo = mongoose.model("MasConsejo", masConsejoSchema);
+export default MasConsejo;
