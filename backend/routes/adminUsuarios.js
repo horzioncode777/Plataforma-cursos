@@ -1,7 +1,7 @@
-const express = require("express");
-const Citizen = require("../models/Citizen");
-const MisCurso = require("../models/MisCurso");
-const Course = require("../models/Course");
+import express from "express";
+import Citizen from "../models/Citizen.js";
+import MisCurso from "../models/MisCurso.js";
+import Course from "../models/Course.js";
 
 const router = express.Router();
 
@@ -28,4 +28,4 @@ router.get("/usuarios", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
