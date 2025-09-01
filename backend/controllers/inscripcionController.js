@@ -1,9 +1,11 @@
-const MisCurso = require("../models/MisCurso");
+// 📍 backend/controllers/inscripcionController.js
+import MisCurso from "../models/MisCurso.js";
 
-const crearInscripcion = async (req, res) => {
+export const crearInscripcion = async (req, res) => {
   try {
     // Obtenemos el ID del usuario desde el token
-    const usuario = req.user._id; // Esto es si tienes el middleware de autenticación configurado correctamente
+    const usuario = req.user?._id || req.citizen?._id; 
+    // ⚠️ soporte tanto para admin (req.user) como para ciudadano (req.citizen)
 
     // Verificamos que el curso haya sido proporcionado en el cuerpo de la solicitud
     const { curso } = req.body;
@@ -21,24 +23,21 @@ const crearInscripcion = async (req, res) => {
     const inscripcionGuardada = await nuevaInscripcion.save();
     res.status(201).json(inscripcionGuardada);
   } catch (error) {
+    console.error("❌ Error al crear inscripción:", error);
     res.status(400).json({ mensaje: "Error al crear inscripción", error });
   }
 };
 
-const obtenerInscripciones = async (req, res) => {
+export const obtenerInscripciones = async (req, res) => {
   try {
     const inscripciones = await MisCurso.find()
       .populate("usuario", "nombre apellido") // Poblamos el campo de usuario con solo nombre y apellido
-      .populate("curso", "titulo descripcion") // Poblamos el curso con título y descripción
+      .populate("curso", "title description") // ⚠️ Ajusté: en tu modelo es `title` y `description`
       .sort({ createdAt: -1 });
 
     res.status(200).json(inscripciones);
   } catch (error) {
+    console.error("❌ Error al obtener inscripciones:", error);
     res.status(500).json({ mensaje: "Error al obtener inscripciones", error });
   }
-};
-
-module.exports = {
-  crearInscripcion,
-  obtenerInscripciones,
 };

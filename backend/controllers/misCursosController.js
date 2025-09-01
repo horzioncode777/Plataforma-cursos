@@ -1,24 +1,26 @@
-const MisCurso = require("../models/MisCurso");
+// 📍 backend/controllers/misCursosController.js
+import MisCurso from "../models/MisCurso.js";
 
 // 🔹 Obtener cursos inscritos
-const obtenerCursosInscritos = async (req, res) => {
+export const obtenerCursosInscritos = async (req, res) => {
   const usuarioId = req.citizen._id;
 
   try {
     const cursos = await MisCurso.find({ usuario: usuarioId })
       .populate({
         path: "curso",
-        select: "title description image linkContenido linkModulos", // ✅ Agregado
+        select: "title description image linkContenido linkModulos", // ✅ coincide con Course.js
       });
 
     res.status(200).json(cursos);
   } catch (error) {
+    console.error("❌ Error al obtener cursos:", error);
     res.status(500).json({ mensaje: "Error al obtener cursos", error: error.message });
   }
 };
 
 // 🔹 Inscribirse a un curso
-const inscribirseCurso = async (req, res) => {
+export const inscribirseCurso = async (req, res) => {
   const usuarioId = req.citizen._id;
   const { cursoId } = req.body;
 
@@ -33,12 +35,13 @@ const inscribirseCurso = async (req, res) => {
 
     res.status(201).json({ mensaje: "Inscripción exitosa", inscripcion: nuevaInscripcion });
   } catch (error) {
+    console.error("❌ Error al inscribirse:", error);
     res.status(500).json({ mensaje: "Error al inscribirse", error: error.message });
   }
 };
 
 // 🔹 Eliminar inscripción
-const eliminarInscripcion = async (req, res) => {
+export const eliminarInscripcion = async (req, res) => {
   const usuarioId = req.citizen._id;
   const inscripcionId = req.params.id;
 
@@ -53,12 +56,7 @@ const eliminarInscripcion = async (req, res) => {
 
     res.status(200).json({ mensaje: "Inscripción eliminada correctamente" });
   } catch (error) {
+    console.error("❌ Error al eliminar inscripción:", error);
     res.status(500).json({ mensaje: "Error al eliminar la inscripción", error: error.message });
   }
-};
-
-module.exports = {
-  obtenerCursosInscritos,
-  inscribirseCurso,
-  eliminarInscripcion,
 };

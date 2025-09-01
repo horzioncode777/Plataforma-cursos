@@ -1,6 +1,7 @@
-const Course = require("../models/Course");
+// 📍 backend/controllers/courseController.js
+import Course from "../models/Course.js";
 
-const crearCurso = async (req, res) => {
+export const crearCurso = async (req, res) => {
   try {
     const { title, description, linkContenido, linkModulos } = req.body;
 
@@ -10,7 +11,7 @@ const crearCurso = async (req, res) => {
     if (linkModulos) {
       try {
         modulosLink = JSON.parse(linkModulos);
-      } catch (e) {
+      } catch {
         return res.status(400).json({ error: "Error al procesar linkModulos" });
       }
     }
@@ -45,7 +46,7 @@ const crearCurso = async (req, res) => {
   }
 };
 
-const actualizarCurso = async (req, res) => {
+export const actualizarCurso = async (req, res) => {
   try {
     const { title, description, linkContenido, linkModulos } = req.body;
 
@@ -53,7 +54,7 @@ const actualizarCurso = async (req, res) => {
     if (linkModulos) {
       try {
         parsedLinkModulos = JSON.parse(linkModulos);
-      } catch (e) {
+      } catch {
         return res.status(400).json({ error: "Error al procesar linkModulos" });
       }
     }
@@ -81,18 +82,10 @@ const actualizarCurso = async (req, res) => {
     if (imagePath) updatedFields.image = imagePath;
     if (imagenPlataformaPath) updatedFields.imagenPlataforma = imagenPlataformaPath;
 
-    const cursoActualizado = await Course.findByIdAndUpdate(req.params.id, updatedFields, {
-      new: true,
-    });
-
+    const cursoActualizado = await Course.findByIdAndUpdate(req.params.id, updatedFields, { new: true });
     res.json(cursoActualizado);
   } catch (error) {
     console.error("❌ Error al actualizar el curso:", error);
     res.status(500).json({ mensaje: "Error al actualizar el curso" });
   }
-};
-
-module.exports = {
-  crearCurso,
-  actualizarCurso,
 };

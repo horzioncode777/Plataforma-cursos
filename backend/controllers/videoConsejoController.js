@@ -1,7 +1,8 @@
-const VideoConsejo = require("../models/VideoConsejo");
+// 📍 backend/controllers/videoConsejoController.js
+import VideoConsejo from "../models/VideoConsejo.js";
 
 // Obtener todos los video consejos
-const getAllVideoConsejos = async (req, res) => {
+export const getAllVideoConsejos = async (req, res) => {
   try {
     const consejos = await VideoConsejo.find();
     res.status(200).json(consejos);
@@ -12,7 +13,7 @@ const getAllVideoConsejos = async (req, res) => {
 };
 
 // Crear nuevo video consejo
-const createVideoConsejo = async (req, res) => {
+export const createVideoConsejo = async (req, res) => {
   try {
     const videoFile = req.files?.["video"]?.[0];
     const thumbnailFile = req.files?.["thumbnail"]?.[0];
@@ -35,7 +36,7 @@ const createVideoConsejo = async (req, res) => {
 };
 
 // Actualizar video consejo
-const updateVideoConsejo = async (req, res) => {
+export const updateVideoConsejo = async (req, res) => {
   try {
     const { id } = req.params;
     const updates = {};
@@ -61,7 +62,7 @@ const updateVideoConsejo = async (req, res) => {
 };
 
 // Eliminar video consejo
-const deleteVideoConsejo = async (req, res) => {
+export const deleteVideoConsejo = async (req, res) => {
   try {
     const { id } = req.params;
     const eliminado = await VideoConsejo.findByIdAndDelete(id);
@@ -75,11 +76,4 @@ const deleteVideoConsejo = async (req, res) => {
     console.error("❌ Error al eliminar video consejo:", err);
     res.status(500).json({ error: "Error al eliminar el video consejo" });
   }
-};
-
-module.exports = {
-  getAllVideoConsejos,
-  createVideoConsejo,
-  updateVideoConsejo,
-  deleteVideoConsejo,
 };
