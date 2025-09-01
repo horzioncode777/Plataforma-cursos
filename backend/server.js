@@ -93,3 +93,11 @@ app.use((req, res) => {
 app.listen(PORT, () => {
   console.log(`✅ Servidor corriendo en puerto ${PORT}`);
 });
+// 🔎 Ruta de prueba rápida
+app.get("/api/test", (req, res) => {
+  res.json({
+    ok: true,
+    message: "🚀 Backend en Render funcionando correctamente",
+    timestamp: new Date(),
+  });
+});
