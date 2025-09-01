@@ -1,8 +1,9 @@
-const express = require("express");
+import express from "express";
+import Noticias from "../models/Noticias.js";
+import multer from "multer";
+import path from "path";
+
 const router = express.Router();
-const Noticias = require("../models/Noticias");
-const multer = require("multer");
-const path = require("path");
 
 // Configuración de almacenamiento para las imágenes
 const storage = multer.diskStorage({
@@ -32,10 +33,10 @@ router.post("/", upload.single("image"), async (req, res) => {
     const nuevaNoticia = new Noticias({
       title: req.body.title,
       description: req.body.description,
-      date: req.body.date || new Date(), // Usa la fecha actual si no se proporciona
+      date: req.body.date || new Date(),
       content: req.body.content,
-      link: req.body.link || "", // Nuevo campo link, opcional
-      isMain: req.body.isMain === "true" || false, // Nuevo campo isMain, marca como principal
+      link: req.body.link || "", // Nuevo campo link
+      isMain: req.body.isMain === "true" || false, // Campo isMain
       image: req.file ? `/uploads/${req.file.filename}` : null,
     });
 
@@ -46,7 +47,7 @@ router.post("/", upload.single("image"), async (req, res) => {
   }
 });
 
-// Editar una noticia con nueva imagen, link y isMain
+// Editar una noticia
 router.put("/:id", upload.single("image"), async (req, res) => {
   try {
     const datosActualizados = {
@@ -54,8 +55,8 @@ router.put("/:id", upload.single("image"), async (req, res) => {
       description: req.body.description,
       date: req.body.date || new Date(),
       content: req.body.content,
-      link: req.body.link || "", // Asegurar que link también se pueda actualizar
-      isMain: req.body.isMain === "true" || false, // Actualizar el campo isMain
+      link: req.body.link || "",
+      isMain: req.body.isMain === "true" || false,
     };
 
     if (req.file) {
@@ -84,4 +85,4 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

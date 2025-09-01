@@ -1,4 +1,4 @@
-const jwt = require("jsonwebtoken");
+import jwt from "jsonwebtoken";
 
 const authMiddleware = (req, res, next) => {
   const token = req.header("Authorization")?.split(" ")[1]; // Asegúrate de que el token se reciba correctamente
@@ -8,7 +8,7 @@ const authMiddleware = (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.SECRET_KEY || "secreto"); // Asegúrate de usar la misma clave secreta
+    const decoded = jwt.verify(token, process.env.SECRET_KEY || "secreto"); // Usa la misma clave secreta
     req.user = decoded;
     next();
   } catch (error) {
@@ -16,4 +16,4 @@ const authMiddleware = (req, res, next) => {
   }
 };
 
-module.exports = authMiddleware;
+export default authMiddleware;

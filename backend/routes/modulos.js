@@ -1,10 +1,14 @@
-const express = require("express");
-const path = require("path");
-const fs = require("fs");
-const unzipper = require("unzipper");
-const jwt = require("jsonwebtoken");
-const MisCurso = require("../models/MisCurso");
-const multer = require("multer");
+import express from "express";
+import path, { dirname } from "path";
+import fs from "fs";
+import unzipper from "unzipper";
+import jwt from "jsonwebtoken";
+import MisCurso from "../models/MisCurso.js";
+import multer from "multer";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const router = express.Router();
 
@@ -24,10 +28,7 @@ const upload = multer({
   storage,
   limits: { fileSize: 600 * 1024 * 1024 }, // hasta 600MB
   fileFilter: (req, file, cb) => {
-    const allowedTypes = [
-      "application/zip",
-      "application/x-zip-compressed"
-    ];
+    const allowedTypes = ["application/zip", "application/x-zip-compressed"];
     if (allowedTypes.includes(file.mimetype)) {
       cb(null, true);
     } else {
@@ -38,9 +39,7 @@ const upload = multer({
 
 // === Sanear nombres de carpetas ===
 const sanitize = (str) =>
-  str.normalize("NFD")
-    .replace(/[^\w\-]+/g, "-")
-    .replace(/\-+/g, "-");
+  str.normalize("NFD").replace(/[^\w\-]+/g, "-").replace(/\-+/g, "-");
 
 // === Subir módulo ZIP corregido ===
 router.post("/subir-modulo", upload.single("archivoZip"), async (req, res) => {
@@ -75,7 +74,6 @@ router.post("/subir-modulo", upload.single("archivoZip"), async (req, res) => {
         console.error("❌ Error al descomprimir ZIP:", err);
         res.status(500).json({ error: "Error al descomprimir ZIP", detalle: err.message });
       });
-
   } catch (error) {
     console.error("❌ Error general al subir módulo:", error);
     res.status(500).json({ mensaje: "Error al subir módulo", detalle: error.message });
@@ -161,4 +159,4 @@ router.get("/cerrar-acceso", (req, res) => {
   res.status(200).json({ message: "Cookie de acceso al módulo eliminada" });
 });
 
-module.exports = router;
+export default router;

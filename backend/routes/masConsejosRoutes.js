@@ -1,6 +1,7 @@
-const express = require("express");
+import express from "express";
+import MasConsejo from "../models/MasConsejo.js";
+
 const router = express.Router();
-const MasConsejo = require("../models/MasConsejo");
 
 // GET todos los MAS CONSEJOS
 router.get("/", async (req, res) => {
@@ -44,4 +45,4 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

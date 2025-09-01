@@ -1,23 +1,28 @@
-const express = require("express");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const fs = require("fs");
-const path = require("path");
-const multer = require("multer");
-const Citizen = require("../models/Citizen");
-const authMiddleware = require("../middleware/authMiddleware");
-const authCitizen = require("../middleware/authCitizen");
+import express from "express";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import fs from "fs";
+import path, { dirname } from "path";
+import multer from "multer";
+import { fileURLToPath } from "url";
+
+import Citizen from "../models/Citizen.js";
+import authMiddleware from "../middleware/authMiddleware.js";
+import authCitizen from "../middleware/authCitizen.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const router = express.Router();
 
 // Configuración de Multer para imágenes de perfil
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "uploads/perfiles/");  // Carpeta para almacenar las imágenes de perfil
+    cb(null, "uploads/perfiles/"); // Carpeta para almacenar imágenes de perfil
   },
   filename: (req, file, cb) => {
-    const ext = path.extname(file.originalname);  // Obtener extensión del archivo
-    cb(null, `${Date.now()}-${file.fieldname}${ext}`);  // Nombre único para la imagen
+    const ext = path.extname(file.originalname);
+    cb(null, `${Date.now()}-${file.fieldname}${ext}`);
   },
 });
 
@@ -26,7 +31,7 @@ const fileFilter = (req, file, cb) => {
   const isValidExt = allowedTypes.test(path.extname(file.originalname).toLowerCase());
   const isValidMime = allowedTypes.test(file.mimetype);
   if (isValidExt && isValidMime) {
-    cb(null, true);  // Permitir el archivo si cumple con las restricciones
+    cb(null, true);
   } else {
     cb(new Error("Solo se permiten imágenes .jpg, .jpeg, .png"));
   }
@@ -34,7 +39,7 @@ const fileFilter = (req, file, cb) => {
 
 const upload = multer({
   storage,
-  limits: { fileSize: 2 * 1024 * 1024 }, // 2MB máximo para las imágenes
+  limits: { fileSize: 2 * 1024 * 1024 }, // 2MB máximo
   fileFilter,
 });
 
@@ -51,7 +56,7 @@ router.post("/register-user", async (req, res) => {
     municipio,
     telefono,
     email,
-    password
+    password,
   } = req.body;
 
   try {
@@ -81,9 +86,7 @@ router.post("/register-user", async (req, res) => {
 
     await newCitizen.save();
 
-    const token = jwt.sign({ id: newCitizen._id }, process.env.SECRET_KEY, {
-      expiresIn: "7d",
-    });
+    const token = jwt.sign({ id: newCitizen._id }, process.env.SECRET_KEY, { expiresIn: "7d" });
 
     res.status(201).json({ token });
   } catch (error) {
@@ -97,7 +100,7 @@ router.get("/perfil", authCitizen, (req, res) => {
   res.status(200).json(req.citizen);
 });
 
-// Obtener todos los ciudadanos (uso interno o admin)
+// Obtener todos los ciudadanos
 router.get("/users", async (req, res) => {
   try {
     const citizens = await Citizen.find().select("-password");
@@ -108,7 +111,7 @@ router.get("/users", async (req, res) => {
   }
 });
 
-// Actualizar perfil completo (nombre, apellido, etc.) y/o imagen de perfil
+// Actualizar perfil completo (datos + imagen)
 router.put("/perfil", authCitizen, upload.single("fotoPerfil"), async (req, res) => {
   try {
     const citizen = await Citizen.findById(req.citizen._id);
@@ -135,7 +138,6 @@ router.put("/perfil", authCitizen, upload.single("fotoPerfil"), async (req, res)
           fs.unlinkSync(oldPath);
         }
       }
-
       citizen.fotoPerfil = req.file.path;
     }
 
@@ -157,7 +159,7 @@ router.put("/perfil", authCitizen, upload.single("fotoPerfil"), async (req, res)
   }
 });
 
-// ✅ NUEVA RUTA: Actualizar solo imagen de perfil
+// Actualizar solo imagen de perfil
 router.put("/perfil/foto", authCitizen, upload.single("fotoPerfil"), async (req, res) => {
   try {
     const citizen = await Citizen.findById(req.citizen._id);
@@ -178,7 +180,6 @@ router.put("/perfil/foto", authCitizen, upload.single("fotoPerfil"), async (req,
     }
 
     citizen.fotoPerfil = req.file.path;
-
     await citizen.save();
 
     res.status(200).json({
@@ -191,4 +192,4 @@ router.put("/perfil/foto", authCitizen, upload.single("fotoPerfil"), async (req,
   }
 });
 
-module.exports = router;
+export default router;

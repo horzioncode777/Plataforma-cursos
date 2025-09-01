@@ -1,8 +1,13 @@
-const express = require("express");
+import express from "express";
+import multer from "multer";
+import path, { dirname } from "path";
+import fs from "fs";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 const router = express.Router();
-const multer = require("multer");
-const path = require("path");
-const fs = require("fs");
 
 // Configuración de multer
 const storage = multer.diskStorage({
@@ -32,7 +37,7 @@ const allowedMimeTypes = [
 
 const upload = multer({
   storage,
-  limits: { fileSize: 600 * 1024 * 1024 }, // 🔧 Ahora permite hasta 600MB
+  limits: { fileSize: 600 * 1024 * 1024 }, // 🔧 Hasta 600MB
   fileFilter: function (req, file, cb) {
     if (allowedMimeTypes.includes(file.mimetype)) {
       cb(null, true);
@@ -41,7 +46,6 @@ const upload = multer({
     }
   },
 });
-
 
 // Ruta para subida de imagen individual
 router.post("/", upload.single("imagen"), (req, res) => {
@@ -52,4 +56,4 @@ router.post("/", upload.single("imagen"), (req, res) => {
   res.json({ url });
 });
 
-module.exports = router;
+export default router;

@@ -1,10 +1,13 @@
-// 📍 backend/routes/uploadModulo.js
-const express = require("express");
-const multer = require("multer");
-const unzipper = require("unzipper");
-const fs = require("fs-extra");
-const path = require("path");
-const Course = require("../models/Course");
+import express from "express";
+import multer from "multer";
+import unzipper from "unzipper";
+import fs from "fs-extra";
+import path, { dirname } from "path";
+import { fileURLToPath } from "url";
+import Course from "../models/Course.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const router = express.Router();
 
@@ -71,7 +74,10 @@ router.post("/subir-modulo", upload.single("archivoZip"), async (req, res) => {
       return res.status(404).json({ mensaje: "Curso no encontrado" });
     }
 
-    cursoExistente.modulos.push({ nombre: modulo, archivos: [{ nombre: "index.html", url: rutaRelativa }] });
+    cursoExistente.modulos.push({
+      nombre: modulo,
+      archivos: [{ nombre: "index.html", url: rutaRelativa }],
+    });
     await cursoExistente.save();
 
     return res.status(201).json({
@@ -84,4 +90,4 @@ router.post("/subir-modulo", upload.single("archivoZip"), async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

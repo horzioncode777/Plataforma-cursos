@@ -1,6 +1,10 @@
-const multer = require("multer");
-const path = require("path");
-const fs = require("fs");
+import multer from "multer";
+import path, { dirname } from "path";
+import fs from "fs";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 // Asegurar que exista la carpeta 'uploads'
 const uploadDir = path.join(__dirname, "..", "uploads");
@@ -37,4 +41,4 @@ const upload = multer({
   },
 });
 
-module.exports = upload;
+export default upload;

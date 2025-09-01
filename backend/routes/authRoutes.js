@@ -1,10 +1,9 @@
-const express = require("express");
-const User = require("../models/User");
-const Citizen = require("../models/Citizen"); // ✅ Modelo para ciudadanos
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
-const nodemailer = require("nodemailer");
-require("dotenv").config();
+import express from "express";
+import User from "../models/User.js";
+import Citizen from "../models/Citizen.js"; // ✅ Modelo para ciudadanos
+import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
+import nodemailer from "nodemailer";
 
 const router = express.Router();
 const SECRET_KEY = process.env.SECRET_KEY;
@@ -202,4 +201,4 @@ router.post("/logout", (req, res) => {
   res.json({ message: "Sesión cerrada con éxito" });
 });
 
-module.exports = router;
+export default router;
