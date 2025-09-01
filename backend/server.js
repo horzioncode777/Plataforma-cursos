@@ -1,22 +1,34 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
-const path = require("path");
-const cookieParser = require("cookie-parser");
-require("dotenv").config();
+import express from "express";
+import mongoose from "mongoose";
+import cors from "cors";
+import path from "path";
+import cookieParser from "cookie-parser";
+import dotenv from "dotenv";
+import { fileURLToPath } from "url";
+
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// __dirname en ES Modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 // 🛠️ Middleware en orden correcto
 app.use(cookieParser());
-app.use(cors({
-  origin: "http://localhost:5174", // 🔁 Cambia al puerto real del frontend
-  credentials: true
-}));
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5174", // dev
+      "https://horzioncode777.github.io" // producción (GitHub Pages)
+    ],
+    credentials: true,
+  })
+);
 app.use(express.json());
 
-// Archivos estáticos
+// Archivos estáticos (⚠️ no persistentes en Render)
 app.use("/public", express.static(path.join(__dirname, "public")));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/cursos", express.static(path.join(__dirname, "public/cursos")));
@@ -28,11 +40,12 @@ if (!mongoURI) {
   process.exit(1);
 }
 
-mongoose.connect(mongoURI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  serverSelectionTimeoutMS: 5000,
-})
+mongoose
+  .connect(mongoURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    serverSelectionTimeoutMS: 5000,
+  })
   .then(() => console.log("✅ Conectado a MongoDB Atlas"))
   .catch((err) => {
     console.error("❌ Error de conexión a MongoDB:", err.message);
@@ -40,18 +53,18 @@ mongoose.connect(mongoURI, {
   });
 
 // Rutas
-const authRoutes = require("./routes/authRoutes");
-const courseRoutes = require("./routes/courseRoutes");
-const noticiasRoutes = require("./routes/noticiasRoutes");
-const authMiddleware = require("./middleware/authMiddleware");
-const masConsejosRoutes = require("./routes/masConsejosRoutes");
-const videoConsejosRoutes = require("./routes/videoconsejos");
-const conseticRoutes = require("./routes/conseticroutes");
-const uploadRoute = require("./routes/upload");
-const citizenRoutes = require("./routes/CitizenRoutes");
-const misCursosRoutes = require("./routes/misCursosRoutes");
-const adminUsuariosRoutes = require("./routes/adminUsuarios");
-const modulosRouter = require("./routes/modulos");
+import authRoutes from "./routes/authRoutes.js";
+import courseRoutes from "./routes/courseRoutes.js";
+import noticiasRoutes from "./routes/noticiasRoutes.js";
+import authMiddleware from "./middleware/authMiddleware.js";
+import masConsejosRoutes from "./routes/masConsejosRoutes.js";
+import videoConsejosRoutes from "./routes/videoconsejos.js";
+import conseticRoutes from "./routes/conseticroutes.js";
+import uploadRoute from "./routes/upload.js";
+import citizenRoutes from "./routes/CitizenRoutes.js";
+import misCursosRoutes from "./routes/misCursosRoutes.js";
+import adminUsuariosRoutes from "./routes/adminUsuarios.js";
+import modulosRouter from "./routes/modulos.js";
 
 app.use("/api/upload", uploadRoute);
 app.use("/api/auth", authRoutes);
@@ -64,7 +77,7 @@ app.use("/api/citizen", citizenRoutes);
 app.use("/api/miscursos", misCursosRoutes);
 app.use("/api", adminUsuariosRoutes);
 app.use("/api/modulos", modulosRouter);
-app.use("/modulos", require("./routes/modulos")); // 🔐 Protección por cookie
+app.use("/modulos", modulosRouter); // 🔐
 
 app.use("/api/courses/protected", authMiddleware, courseRoutes);
 
@@ -72,11 +85,11 @@ app.get("/", (req, res) => {
   res.send("🚀 Servidor funcionando correctamente");
 });
 
+// 404 handler
 app.use((req, res) => {
   res.status(404).json({ message: "❌ Ruta no encontrada" });
 });
 
 app.listen(PORT, () => {
-  console.log(`✅ Servidor corriendo en http://localhost:${PORT}`);
+  console.log(`✅ Servidor corriendo en puerto ${PORT}`);
 });
-  
