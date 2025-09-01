@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import AdminNavbar from "../components/AdminNavbar";
-import "./AdminNoticias.css";
+import "./adminNoticias.css";
 
 const AdminNoticias = () => {
   const [noticias, setNoticias] = useState([]);
