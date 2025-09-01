@@ -1,11 +1,11 @@
-const express = require("express");
-const router = express.Router();
-const Course = require("../models/Course");
-const MisCurso = require("../models/MisCurso");
-const upload = require("../middleware/upload");
-const authCitizen = require("../middleware/authCitizen"); // 🔐 Middleware corregido
-const { crearCurso, actualizarCurso } = require("../controllers/courseController");
+import express from "express";
+import Course from "../models/Course.js";
+import MisCurso from "../models/MisCurso.js";
+import upload from "../middleware/upload.js";
+import authCitizen from "../middleware/authCitizen.js"; // 🔐 Middleware corregido
+import { crearCurso, actualizarCurso } from "../controllers/courseController.js";
 
+const router = express.Router();
 const multiUpload = upload.any();
 
 router.get("/", async (req, res) => {
@@ -54,4 +54,4 @@ router.get("/modulos/:cursoId", authCitizen, async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
