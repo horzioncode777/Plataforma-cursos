@@ -70,7 +70,6 @@ const Home = () => {
           <div className="cursos-p">
             <p>Profundiza en tecnología y más</p>
             <p>Cursos para impulsar tu conocimiento</p>
-            <div className="bg-red-300 text-white px- py-1">TAILWIND ON</div>
           </div>
           <img src="/assets/Logo_Tic.jpg" alt="TIC.LOGO" className="sec-tic" />
         </div>
