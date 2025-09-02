@@ -17,15 +17,21 @@ const __dirname = path.dirname(__filename);
 
 // 🛠️ Middleware en orden correcto
 app.use(cookieParser());
+
+// 🔹 Configuración CORS actualizada
+const allowedOrigins = [
+  "http://localhost:5174", // dev
+  "http://localhost:5173", // dev (Vite usa 5173 por defecto)
+  "https://plataforma-cursos-sage.vercel.app", // producción en Vercel
+];
+
 app.use(
   cors({
-    origin: [
-      "http://localhost:5174", // dev
-      "https://horzioncode777.github.io" // producción (GitHub Pages)
-    ],
+    origin: allowedOrigins,
     credentials: true,
   })
 );
+
 app.use(express.json());
 
 // Archivos estáticos (⚠️ no persistentes en Render)
@@ -81,8 +87,13 @@ app.use("/modulos", modulosRouter); // 🔐
 
 app.use("/api/courses/protected", authMiddleware, courseRoutes);
 
-app.get("/", (req, res) => {
-  res.send("🚀 Servidor funcionando correctamente");
+// 🔎 Ruta de prueba rápida
+app.get("/api/test", (req, res) => {
+  res.json({
+    ok: true,
+    message: "🚀 Backend en Render funcionando correctamente",
+    timestamp: new Date(),
+  });
 });
 
 // 404 handler
@@ -92,12 +103,4 @@ app.use((req, res) => {
 
 app.listen(PORT, () => {
   console.log(`✅ Servidor corriendo en puerto ${PORT}`);
-});
-// 🔎 Ruta de prueba rápida
-app.get("/api/test", (req, res) => {
-  res.json({
-    ok: true,
-    message: "🚀 Backend en Render funcionando correctamente",
-    timestamp: new Date(),
-  });
 });
