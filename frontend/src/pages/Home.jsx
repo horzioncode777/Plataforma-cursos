@@ -62,6 +62,14 @@ const Home = () => {
     navigate("/loginUser");
   };
 
+  // 👇 función para normalizar imágenes (Render usa rutas relativas, Cloudinary ya da URL completa)
+  const getImageUrl = (path) => {
+    if (!path) return "";
+    return path.startsWith("http")
+      ? path
+      : `${API_URL}${path.startsWith("/") ? path : "/" + path}`;
+  };
+
   return (
     <div className="home-container">
       <section className="hero">
@@ -93,7 +101,7 @@ const Home = () => {
                   <div className="barra">
                     {course.imagenPlataforma && (
                       <img
-                        src={course.imagenPlataforma}   // 👈 URL completa de Cloudinary
+                        src={getImageUrl(course.imagenPlataforma)}
                         alt={course.title}
                         className="plataforma-image"
                       />
@@ -102,7 +110,7 @@ const Home = () => {
                   </div>
                   {course.image && (
                     <img
-                      src={course.image}   // 👈 URL completa de Cloudinary
+                      src={getImageUrl(course.image)}
                       alt={course.title}
                       className="course-image"
                     />
