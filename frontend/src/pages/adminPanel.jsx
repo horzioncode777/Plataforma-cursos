@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import AdminNavbar from "../components/AdminNavbar";
 import "./adminPanel.css";
+import API_URL from "../api"; // 👈 usamos variable de entorno
 
 const AdminPanel = () => {
   const [courses, setCourses] = useState([]);
@@ -25,7 +26,7 @@ const AdminPanel = () => {
 
   const fetchCourses = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5000/api/courses");
+      const { data } = await axios.get(`${API_URL}/api/courses`);
       setCourses(data);
     } catch (error) {
       console.error("Error fetching courses", error);
@@ -37,6 +38,7 @@ const AdminPanel = () => {
     navigate("/login");
   };
 
+  // ---------- MÓDULOS ZIP ----------
   const handleModuloChange = (index, e) => {
     const nuevosModulos = [...modulos];
     nuevosModulos[index].nombre = e.target.value;
@@ -57,6 +59,33 @@ const AdminPanel = () => {
     setModulos(nuevosModulos);
   };
 
+  const handleSubirModulos = async (e) => {
+    e.preventDefault();
+    const rutas = [];
+    let mensaje = "✅ Módulos ZIP subidos correctamente:\n\n";
+
+    for (let modulo of modulos) {
+      const zipFormData = new FormData();
+      zipFormData.append("archivoZip", modulo.archivoZip);
+      zipFormData.append("curso", form.title);
+      zipFormData.append("modulo", modulo.nombre);
+
+      try {
+        const res = await axios.post(`${API_URL}/api/modulos/subir-modulo`, zipFormData);
+        if (res.data && res.data.ruta) {
+          rutas.push({ nombre: modulo.nombre, ruta: res.data.ruta });
+          mensaje += `📦 ${modulo.nombre}: ${res.data.ruta}\n`;
+        }
+      } catch (err) {
+        console.error("Error al subir módulo:", err);
+      }
+    }
+
+    setModulosSubidos(rutas);
+    alert(mensaje);
+  };
+
+  // ---------- MÓDULOS POR LINK ----------
   const handleModuloLinkChange = (index, field, value) => {
     const nuevosLinks = [...modulosPorLink];
     nuevosLinks[index][field] = value;
@@ -71,38 +100,25 @@ const AdminPanel = () => {
     setModulosPorLink(nuevosLinks);
   };
 
-  const handleSubirModulos = async (e) => {
-    e.preventDefault();
-    const rutas = [];
-    let mensaje = "✅ Módulos ZIP subidos correctamente:\n\n";
-  
-    for (let modulo of modulos) {
-      const zipFormData = new FormData();
-      zipFormData.append("archivoZip", modulo.archivoZip);
-      zipFormData.append("curso", form.title);
-      zipFormData.append("modulo", modulo.nombre);
-  
-      try {
-        const res = await axios.post("http://localhost:5000/api/modulos/subir-modulo", zipFormData);
-        if (res.data && res.data.ruta) {
-          const rutaCompleta = `http://localhost:5000${res.data.ruta}`;
-          rutas.push({ nombre: modulo.nombre, ruta: res.data.ruta });
-          mensaje += `📦 ${modulo.nombre}: ${rutaCompleta}\n`;
-        }
-      } catch (err) {
-        console.error("Error al subir módulo:", err);
-      }
-    }
-  
-    setModulosSubidos(rutas);
-    alert(mensaje);
-  };
-  
+  // ---------- CLOUDINARY UPLOAD ----------
+  const subirImagen = async (file) => {
+    const formData = new FormData();
+    formData.append("imagen", file);
 
+    try {
+      const { data } = await axios.post(`${API_URL}/api/upload`, formData);
+      return data.url; // URL pública de Cloudinary
+    } catch (err) {
+      console.error("❌ Error al subir imagen:", err);
+      return null;
+    }
+  };
+
+  // ---------- CRUD CURSOS ----------
   const handleDelete = async (id) => {
     if (window.confirm("¿Estás seguro de eliminar este curso?")) {
       try {
-        await axios.delete(`http://localhost:5000/api/courses/${id}`);
+        await axios.delete(`${API_URL}/api/courses/${id}`);
         fetchCourses();
         alert("✅ Curso eliminado exitosamente");
       } catch (error) {
@@ -126,21 +142,25 @@ const AdminPanel = () => {
   const handleSubmitCurso = async (e) => {
     e.preventDefault();
 
-    const formData = new FormData();
-    formData.append("title", form.title);
-    formData.append("description", form.description);
-    formData.append("linkContenido", form.linkContenido);
-    formData.append("linkModulos", JSON.stringify([...modulosSubidos, ...modulosPorLink]));
+    // Subir imágenes a Cloudinary si existen
+    let imageUrl = form.image ? await subirImagen(form.image) : null;
+    let plataformaUrl = form.imagenPlataforma ? await subirImagen(form.imagenPlataforma) : null;
 
-    if (form.image) formData.append("image", form.image);
-    if (form.imagenPlataforma) formData.append("imagenPlataforma", form.imagenPlataforma);
+    const payload = {
+      title: form.title,
+      description: form.description,
+      linkContenido: form.linkContenido,
+      linkModulos: [...modulosSubidos, ...modulosPorLink],
+      image: imageUrl,
+      imagenPlataforma: plataformaUrl,
+    };
 
     try {
       if (editingCourse) {
-        await axios.put(`http://localhost:5000/api/courses/${editingCourse}`, formData);
+        await axios.put(`${API_URL}/api/courses/${editingCourse}`, payload);
         alert("✅ Curso actualizado correctamente");
       } else {
-        await axios.post("http://localhost:5000/api/courses", formData);
+        await axios.post(`${API_URL}/api/courses`, payload);
         alert("✅ Curso creado correctamente");
       }
       setEditingCourse(null);
@@ -155,11 +175,18 @@ const AdminPanel = () => {
       <AdminNavbar onLogout={handleLogout} />
       <h1>Panel de Administración</h1>
 
+      {/* FORM SUBIR MÓDULOS ZIP */}
       <form onSubmit={handleSubirModulos} className="course-form">
         <h2>Subir Módulos ZIP</h2>
         {modulos.map((modulo, index) => (
           <div key={index}>
-            <input type="text" placeholder="Nombre módulo" value={modulo.nombre} onChange={(e) => handleModuloChange(index, e)} required />
+            <input
+              type="text"
+              placeholder="Nombre módulo"
+              value={modulo.nombre}
+              onChange={(e) => handleModuloChange(index, e)}
+              required
+            />
             <input type="file" accept=".zip" onChange={(e) => handleModuloFilesChange(index, e)} required />
             <button className="ButtonEliminar" type="button" onClick={() => eliminarModulo(index)}>Eliminar</button>
           </div>
@@ -168,7 +195,7 @@ const AdminPanel = () => {
         <button type="submit">Subir ZIP</button>
       </form>
 
-      {/* Mostrar módulos subidos */}
+      {/* MOSTRAR MÓDULOS SUBIDOS */}
       {modulosSubidos.length > 0 && (
         <div className="tabla-modulos-subidos">
           <h3>Módulos Subidos</h3>
@@ -183,7 +210,7 @@ const AdminPanel = () => {
               {modulosSubidos.map((mod, index) => (
                 <tr key={index}>
                   <td>{mod.nombre}</td>
-                  <td><a href={`http://localhost:5000${mod.ruta}`} target="_blank" rel="noopener noreferrer">{mod.ruta}</a></td>
+                  <td><a href={mod.ruta} target="_blank" rel="noopener noreferrer">{mod.ruta}</a></td>
                 </tr>
               ))}
             </tbody>
@@ -191,17 +218,31 @@ const AdminPanel = () => {
         </div>
       )}
 
+      {/* FORM CREAR CURSO */}
       <form onSubmit={handleSubmitCurso} className="course-form">
         <h2>Crear Curso</h2>
         <input type="text" placeholder="Título" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} required />
         <input type="text" placeholder="Descripción" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} required />
         <input type="file" accept="image/*" onChange={(e) => setForm({ ...form, image: e.target.files[0] })} required />
         <input type="file" accept="image/*" onChange={(e) => setForm({ ...form, imagenPlataforma: e.target.files[0] })} required />
-        {/* Agregar módulos por link */}
+
+        {/* Módulos por link */}
         {modulosPorLink.map((modulo, index) => (
           <div key={index}>
-            <input type="text" placeholder="Nombre módulo link" value={modulo.nombre} onChange={(e) => handleModuloLinkChange(index, "nombre", e.target.value)} required />
-            <input type="text" placeholder="Ruta módulo link" value={modulo.ruta} onChange={(e) => handleModuloLinkChange(index, "ruta", e.target.value)} required />
+            <input
+              type="text"
+              placeholder="Nombre módulo link"
+              value={modulo.nombre}
+              onChange={(e) => handleModuloLinkChange(index, "nombre", e.target.value)}
+              required
+            />
+            <input
+              type="text"
+              placeholder="Ruta módulo link"
+              value={modulo.ruta}
+              onChange={(e) => handleModuloLinkChange(index, "ruta", e.target.value)}
+              required
+            />
             <button type="button" onClick={() => eliminarModuloLink(index)}>Eliminar</button>
           </div>
         ))}
@@ -209,6 +250,7 @@ const AdminPanel = () => {
         <button type="submit">{editingCourse ? "Actualizar Curso" : "Crear Curso"}</button>
       </form>
 
+      {/* TABLA CURSOS */}
       <table className="course-table">
         <thead>
           <tr>
@@ -224,8 +266,8 @@ const AdminPanel = () => {
             <tr key={course._id}>
               <td>{course.title}</td>
               <td>{course.description}</td>
-              <td><img src={`http://localhost:5000${course.image}`} alt={course.title} width="100" /></td>
-              <td><img src={`http://localhost:5000${course.imagenPlataforma}`} alt={course.title} width="100" /></td>
+              <td>{course.image && <img src={course.image} alt={course.title} width="100" />}</td>
+              <td>{course.imagenPlataforma && <img src={course.imagenPlataforma} alt={course.title} width="100" />}</td>
               <td>
                 <button onClick={() => handleEdit(course)}>Editar</button>
                 <button onClick={() => handleDelete(course._id)}>Eliminar</button>
