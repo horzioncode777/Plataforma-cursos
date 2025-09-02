@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import API_URL from "../api";   // 👈 Importamos la URL base
 import "./Home.css";
 import Navbar from "../components/Min";
 
@@ -13,7 +14,7 @@ const Home = () => {
   const [visibleCoursesCount, setVisibleCoursesCount] = useState(3);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/courses")
+    axios.get(`${API_URL}/api/courses`)   // 👈 ahora usa API_URL
       .then(response => {
         setCourses(response.data);
         setLoading(false);
@@ -52,7 +53,7 @@ const Home = () => {
   const getVisibleCourses = () => {
     if (courses.length < visibleCoursesCount) return courses;
 
-    return Array.from({ length: visibleCoursesCount }, (_, i) => 
+    return Array.from({ length: visibleCoursesCount }, (_, i) =>
       courses[(visibleIndex + i) % courses.length]
     );
   };
@@ -91,14 +92,14 @@ const Home = () => {
                 <div key={course._id} className="course-card">
                   <div className="barra">
                     <img
-                      src={`http://localhost:5000${course.imagenPlataforma}`}
+                      src={`${API_URL}${course.imagenPlataforma}`}   // 👈 cambia imágenes
                       alt={course.title}
                       className="plataforma-image"
                     />
                     <button>Curso</button>
                   </div>
                   <img
-                    src={`http://localhost:5000${course.image}`}
+                    src={`${API_URL}${course.image}`}   // 👈 cambia imágenes
                     alt={course.title}
                     className="course-image"
                   />
