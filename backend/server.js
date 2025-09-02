@@ -18,16 +18,23 @@ const __dirname = path.dirname(__filename);
 // 🛠️ Middleware en orden correcto
 app.use(cookieParser());
 
-// 🔹 Configuración CORS actualizada
+// 🔹 Configuración CORS dinámica
 const allowedOrigins = [
-  "http://localhost:5174", // dev
-  "http://localhost:5173", // dev (Vite usa 5173 por defecto)
+  "http://localhost:5173", // dev (Vite por defecto)
+  "http://localhost:5174", // dev alternativo
   "https://plataforma-cursos-sage.vercel.app", // producción en Vercel
 ];
 
 app.use(
   cors({
-    origin: allowedOrigins,
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true); // permite peticiones internas (Postman, curl)
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("❌ No permitido por CORS: " + origin));
+      }
+    },
     credentials: true,
   })
 );
