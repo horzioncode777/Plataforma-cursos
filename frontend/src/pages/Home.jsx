@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import API_URL from "../api";   // 👈 sigue usando la API para datos
 import "./Home.css";
 import Navbar from "../components/Min";
 
@@ -14,7 +13,7 @@ const Home = () => {
   const [visibleCoursesCount, setVisibleCoursesCount] = useState(3);
 
   useEffect(() => {
-    axios.get(`${API_URL}/api/courses`)
+    axios.get("http://localhost:5000/api/courses")
       .then(response => {
         setCourses(response.data);
         setLoading(false);
@@ -53,7 +52,7 @@ const Home = () => {
   const getVisibleCourses = () => {
     if (courses.length < visibleCoursesCount) return courses;
 
-    return Array.from({ length: visibleCoursesCount }, (_, i) =>
+    return Array.from({ length: visibleCoursesCount }, (_, i) => 
       courses[(visibleIndex + i) % courses.length]
     );
   };
@@ -91,22 +90,18 @@ const Home = () => {
               {getVisibleCourses().map((course) => (
                 <div key={course._id} className="course-card">
                   <div className="barra">
-                    {course.imagenPlataforma && (
-                      <img
-                        src={course.imagenPlataforma}   // 👈 URL completa de Cloudinary
-                        alt={course.title}
-                        className="plataforma-image"
-                      />
-                    )}
+                    <img
+                      src={`http://localhost:5000${course.imagenPlataforma}`}
+                      alt={course.title}
+                      className="plataforma-image"
+                    />
                     <button>Curso</button>
                   </div>
-                  {course.image && (
-                    <img
-                      src={course.image}   // 👈 URL completa de Cloudinary
-                      alt={course.title}
-                      className="course-image"
-                    />
-                  )}
+                  <img
+                    src={`http://localhost:5000${course.image}`}
+                    alt={course.title}
+                    className="course-image"
+                  />
                   <div className="barra-inferior">
                     <span>{course.title}</span>
                     <span className="descripcion" name="descrip">{course.description}</span>
