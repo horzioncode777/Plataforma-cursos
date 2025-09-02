@@ -1,59 +1,47 @@
 import express from "express";
 import multer from "multer";
-import path, { dirname } from "path";
-import fs from "fs";
-import { fileURLToPath } from "url";
+import { v2 as cloudinary } from "cloudinary";
+import dotenv from "dotenv";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
+dotenv.config();
 const router = express.Router();
 
-// Configuración de multer
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    const dir = path.join(__dirname, "../uploads/");
-    fs.mkdirSync(dir, { recursive: true });
-    cb(null, dir);
-  },
-  filename: function (req, file, cb) {
-    const ext = path.extname(file.originalname);
-    const uniqueName = Date.now() + "-" + Math.round(Math.random() * 1e9) + ext;
-    cb(null, uniqueName);
-  },
+// Configuración de Cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-const allowedMimeTypes = [
-  "image/jpeg",
-  "image/png",
-  "image/gif",
-  "video/mp4",
-  "video/quicktime",
-  "video/x-msvideo",
-  "video/x-matroska",
-  "application/zip",
-  "application/x-zip-compressed",
-];
+// Multer para manejar archivos en memoria (no en disco)
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
 
-const upload = multer({
-  storage,
-  limits: { fileSize: 600 * 1024 * 1024 }, // 🔧 Hasta 600MB
-  fileFilter: function (req, file, cb) {
-    if (allowedMimeTypes.includes(file.mimetype)) {
-      cb(null, true);
-    } else {
-      cb(new Error("Archivo no permitido: " + file.mimetype));
+// Ruta para subir a Cloudinary
+router.post("/", upload.single("imagen"), async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ error: "No se recibió archivo" });
     }
-  },
-});
 
-// Ruta para subida de imagen individual
-router.post("/", upload.single("imagen"), (req, res) => {
-  if (!req.file) return res.status(400).json({ error: "No se recibió archivo" });
+    // Subida a Cloudinary
+    const result = await new Promise((resolve, reject) => {
+      const stream = cloudinary.uploader.upload_stream(
+        { folder: "cursos" }, // 👈 Carpeta dentro de Cloudinary
+        (error, result) => {
+          if (error) reject(error);
+          else resolve(result);
+        }
+      );
+      stream.end(req.file.buffer);
+    });
 
-  // ✅ Devolver solo la ruta relativa
-  const url = `/uploads/${req.file.filename}`;
-  res.json({ url });
+    // ✅ Devolver la URL segura
+    res.json({ url: result.secure_url });
+  } catch (err) {
+    console.error("❌ Error al subir imagen:", err);
+    res.status(500).json({ error: "Error al subir imagen" });
+  }
 });
 
 export default router;

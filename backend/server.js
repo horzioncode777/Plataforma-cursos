@@ -15,12 +15,13 @@ const PORT = process.env.PORT || 5000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// 🛠️ Middleware en orden correcto
+// 🛠️ Middleware
 app.use(cookieParser());
+app.use(express.json());
 
 // 🔹 Configuración CORS dinámica
 const allowedOrigins = [
-  "http://localhost:5173", // dev (Vite por defecto)
+  "http://localhost:5173", // dev (Vite)
   "http://localhost:5174", // dev alternativo
   "https://plataforma-cursos-sage.vercel.app", // producción en Vercel
 ];
@@ -28,7 +29,7 @@ const allowedOrigins = [
 app.use(
   cors({
     origin: (origin, callback) => {
-      if (!origin) return callback(null, true); // permite peticiones internas (Postman, curl)
+      if (!origin) return callback(null, true); // Postman, curl, SSR
       if (allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
@@ -39,14 +40,12 @@ app.use(
   })
 );
 
-app.use(express.json());
-
-// Archivos estáticos (⚠️ no persistentes en Render)
+// ⚠️ Archivos estáticos locales (NO persistentes en Render, pero los dejamos para dev)
 app.use("/public", express.static(path.join(__dirname, "public")));
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+app.use("/uploads", express.static(path.join(__dirname, "uploads"))); 
 app.use("/cursos", express.static(path.join(__dirname, "public/cursos")));
 
-// Conexión MongoDB
+// 🔗 Conexión a MongoDB
 const mongoURI = process.env.MONGO_URI;
 if (!mongoURI) {
   console.error("❌ ERROR: La variable MONGO_URI no está definida en .env");
@@ -65,7 +64,7 @@ mongoose
     process.exit(1);
   });
 
-// Rutas
+// 📌 Rutas
 import authRoutes from "./routes/authRoutes.js";
 import courseRoutes from "./routes/courseRoutes.js";
 import noticiasRoutes from "./routes/noticiasRoutes.js";
@@ -73,7 +72,7 @@ import authMiddleware from "./middleware/authMiddleware.js";
 import masConsejosRoutes from "./routes/masConsejosRoutes.js";
 import videoConsejosRoutes from "./routes/videoconsejos.js";
 import conseticRoutes from "./routes/conseticroutes.js";
-import uploadRoute from "./routes/upload.js";
+import uploadRoute from "./routes/upload.js"; // ahora con Cloudinary
 import citizenRoutes from "./routes/CitizenRoutes.js";
 import misCursosRoutes from "./routes/misCursosRoutes.js";
 import adminUsuariosRoutes from "./routes/adminUsuarios.js";
@@ -90,11 +89,11 @@ app.use("/api/citizen", citizenRoutes);
 app.use("/api/miscursos", misCursosRoutes);
 app.use("/api", adminUsuariosRoutes);
 app.use("/api/modulos", modulosRouter);
-app.use("/modulos", modulosRouter); // 🔐
+app.use("/modulos", modulosRouter);
 
 app.use("/api/courses/protected", authMiddleware, courseRoutes);
 
-// 🔎 Ruta de prueba rápida
+// 🔎 Ruta de prueba
 app.get("/api/test", (req, res) => {
   res.json({
     ok: true,
@@ -108,6 +107,7 @@ app.use((req, res) => {
   res.status(404).json({ message: "❌ Ruta no encontrada" });
 });
 
+// 🚀 Iniciar servidor
 app.listen(PORT, () => {
   console.log(`✅ Servidor corriendo en puerto ${PORT}`);
 });
