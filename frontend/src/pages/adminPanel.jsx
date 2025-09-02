@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import API_URL from "../api";   // 👈 usamos API_URL limpio
 import AdminNavbar from "../components/AdminNavbar";
 import "./adminPanel.css";
 
@@ -25,7 +26,7 @@ const AdminPanel = () => {
 
   const fetchCourses = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5000/api/courses");
+      const { data } = await axios.get(`${API_URL}/api/courses`);
       setCourses(data);
     } catch (error) {
       console.error("Error fetching courses", error);
@@ -75,17 +76,17 @@ const AdminPanel = () => {
     e.preventDefault();
     const rutas = [];
     let mensaje = "✅ Módulos ZIP subidos correctamente:\n\n";
-  
+
     for (let modulo of modulos) {
       const zipFormData = new FormData();
       zipFormData.append("archivoZip", modulo.archivoZip);
       zipFormData.append("curso", form.title);
       zipFormData.append("modulo", modulo.nombre);
-  
+
       try {
-        const res = await axios.post("http://localhost:5000/api/modulos/subir-modulo", zipFormData);
+        const res = await axios.post(`${API_URL}/api/modulos/subir-modulo`, zipFormData);
         if (res.data && res.data.ruta) {
-          const rutaCompleta = `http://localhost:5000${res.data.ruta}`;
+          const rutaCompleta = `${API_URL}${res.data.ruta}`;
           rutas.push({ nombre: modulo.nombre, ruta: res.data.ruta });
           mensaje += `📦 ${modulo.nombre}: ${rutaCompleta}\n`;
         }
@@ -93,16 +94,15 @@ const AdminPanel = () => {
         console.error("Error al subir módulo:", err);
       }
     }
-  
+
     setModulosSubidos(rutas);
     alert(mensaje);
   };
-  
 
   const handleDelete = async (id) => {
     if (window.confirm("¿Estás seguro de eliminar este curso?")) {
       try {
-        await axios.delete(`http://localhost:5000/api/courses/${id}`);
+        await axios.delete(`${API_URL}/api/courses/${id}`);
         fetchCourses();
         alert("✅ Curso eliminado exitosamente");
       } catch (error) {
@@ -137,10 +137,10 @@ const AdminPanel = () => {
 
     try {
       if (editingCourse) {
-        await axios.put(`http://localhost:5000/api/courses/${editingCourse}`, formData);
+        await axios.put(`${API_URL}/api/courses/${editingCourse}`, formData);
         alert("✅ Curso actualizado correctamente");
       } else {
-        await axios.post("http://localhost:5000/api/courses", formData);
+        await axios.post(`${API_URL}/api/courses`, formData);
         alert("✅ Curso creado correctamente");
       }
       setEditingCourse(null);
@@ -168,7 +168,6 @@ const AdminPanel = () => {
         <button type="submit">Subir ZIP</button>
       </form>
 
-      {/* Mostrar módulos subidos */}
       {modulosSubidos.length > 0 && (
         <div className="tabla-modulos-subidos">
           <h3>Módulos Subidos</h3>
@@ -183,7 +182,7 @@ const AdminPanel = () => {
               {modulosSubidos.map((mod, index) => (
                 <tr key={index}>
                   <td>{mod.nombre}</td>
-                  <td><a href={`http://localhost:5000${mod.ruta}`} target="_blank" rel="noopener noreferrer">{mod.ruta}</a></td>
+                  <td><a href={`${API_URL}${mod.ruta}`} target="_blank" rel="noopener noreferrer">{mod.ruta}</a></td>
                 </tr>
               ))}
             </tbody>
@@ -197,7 +196,7 @@ const AdminPanel = () => {
         <input type="text" placeholder="Descripción" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} required />
         <input type="file" accept="image/*" onChange={(e) => setForm({ ...form, image: e.target.files[0] })} required />
         <input type="file" accept="image/*" onChange={(e) => setForm({ ...form, imagenPlataforma: e.target.files[0] })} required />
-        {/* Agregar módulos por link */}
+
         {modulosPorLink.map((modulo, index) => (
           <div key={index}>
             <input type="text" placeholder="Nombre módulo link" value={modulo.nombre} onChange={(e) => handleModuloLinkChange(index, "nombre", e.target.value)} required />
@@ -205,6 +204,7 @@ const AdminPanel = () => {
             <button type="button" onClick={() => eliminarModuloLink(index)}>Eliminar</button>
           </div>
         ))}
+
         <button type="button" onClick={agregarModuloLink}>+ Agregar módulo link</button>
         <button type="submit">{editingCourse ? "Actualizar Curso" : "Crear Curso"}</button>
       </form>
@@ -224,8 +224,8 @@ const AdminPanel = () => {
             <tr key={course._id}>
               <td>{course.title}</td>
               <td>{course.description}</td>
-              <td><img src={`http://localhost:5000${course.image}`} alt={course.title} width="100" /></td>
-              <td><img src={`http://localhost:5000${course.imagenPlataforma}`} alt={course.title} width="100" /></td>
+              <td><img src={`${API_URL}${course.image}`} alt={course.title} width="100" /></td>
+              <td><img src={`${API_URL}${course.imagenPlataforma}`} alt={course.title} width="100" /></td>
               <td>
                 <button onClick={() => handleEdit(course)}>Editar</button>
                 <button onClick={() => handleDelete(course._id)}>Eliminar</button>
