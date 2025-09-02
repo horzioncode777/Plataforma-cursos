@@ -1,12 +1,11 @@
 import express from "express";
 import User from "../models/User.js";
-import Citizen from "../models/Citizen.js"; // ✅ Modelo para ciudadanos
+import Citizen from "../models/Citizen.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import nodemailer from "nodemailer";
 
 const router = express.Router();
-const SECRET_KEY = process.env.SECRET_KEY;
 
 // 🔹 Configurar Nodemailer
 const transporter = nodemailer.createTransport({
@@ -25,7 +24,7 @@ const authMiddleware = (req, res, next) => {
   }
 
   try {
-    const verified = jwt.verify(token, SECRET_KEY);
+    const verified = jwt.verify(token, process.env.SECRET_KEY);
     req.user = verified;
     next();
   } catch (error) {
@@ -77,7 +76,7 @@ router.post("/login", async (req, res) => {
       return res.status(400).json({ message: "Contraseña incorrecta" });
     }
 
-    const token = jwt.sign({ id: user._id }, SECRET_KEY, { expiresIn: "1h" });
+    const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY, { expiresIn: "1h" });
 
     res.json({ token, message: "Inicio de sesión exitoso" });
   } catch (error) {
@@ -105,7 +104,7 @@ router.post("/login-user", async (req, res) => {
       return res.status(400).json({ message: "Contraseña incorrecta" });
     }
 
-    const token = jwt.sign({ id: user._id }, SECRET_KEY, { expiresIn: "1h" });
+    const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY, { expiresIn: "1h" });
 
     res.json({ token, message: "Inicio de sesión exitoso" });
   } catch (error) {
@@ -119,11 +118,9 @@ router.post("/forgot-password", async (req, res) => {
   try {
     const { email } = req.body;
 
-    // Primero buscar en User (admin)
     let user = await User.findOne({ email });
     let modelType = "User";
 
-    // Si no lo encuentra en User, buscar en Citizen (ciudadano)
     if (!user) {
       user = await Citizen.findOne({ email });
       modelType = "Citizen";
@@ -133,7 +130,12 @@ router.post("/forgot-password", async (req, res) => {
       return res.status(400).json({ message: "Correo no registrado" });
     }
 
-    const token = jwt.sign({ id: user._id, type: modelType }, SECRET_KEY, { expiresIn: "1h" });
+    const token = jwt.sign(
+      { id: user._id, type: modelType },
+      process.env.SECRET_KEY,
+      { expiresIn: "1h" }
+    );
+
     const resetLink = `http://localhost:5174/reset-password/${token}`;
 
     const mailOptions = {
@@ -176,7 +178,7 @@ router.post("/reset-password/:token", async (req, res) => {
     const { token } = req.params;
     const { password } = req.body;
 
-    const decoded = jwt.verify(token, SECRET_KEY);
+    const decoded = jwt.verify(token, process.env.SECRET_KEY);
     if (!decoded) return res.status(400).json({ message: "Token inválido o expirado" });
 
     const hashedPassword = await bcrypt.hash(password, 12);
